@@ -21,6 +21,7 @@ set spelllang=en,es
 set updatetime=250
 set termguicolors
 set history=500
+set clipboard=unnamedplus
 ""syntax on
 
 "--- GUI OPTIONS ---"

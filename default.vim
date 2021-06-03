@@ -1,5 +1,5 @@
 "--- RC FILE PATH ---"
-let g:rcfile = "/home/aczombie/rice/vimrc/default.vim"
+let g:rcfile = "/home/acifuentes/vimrc/default.vim"
 
 "--- PLUGINS ---"
 call plug#begin()
@@ -20,6 +20,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-syntastic/syntastic'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
+Plug 'preservim/vimux'
+Plug 'christoomey/vim-tmux-navigator'
 " - SYNTAX -"
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'nvie/vim-flake8', {'for': 'python'}
@@ -35,7 +37,7 @@ Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
-source /home/aczombie/rice/vimrc/global.vim
+source /home/acifuentes/vimrc/global.vim
 
 "--- SYNTAX AND LYNTING ---"
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
