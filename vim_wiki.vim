@@ -17,6 +17,7 @@ Plug 'michal-h21/vim-zettel'
 Plug 'ayu-theme/ayu-vim'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-SpellCheck'
+Plug 'ferrine/md-img-paste.vim'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
@@ -140,3 +141,11 @@ hi clear VimwikiItalic
 hi def VimwikiBold term=bold cterm=bold gui=bold ctermfg=yellow guifg=#FFA759
 hi def VimwikiItalic ctermfg=green guifg=#95E6CB
 "hi! def link VimwikiBold Statement
+
+inoremap [a á
+inoremap [e é
+inoremap [i í
+inoremap [o ó
+inoremap [u ú
+inoremap ; ñ
+inoremap ;; ;
