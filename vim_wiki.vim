@@ -1,7 +1,9 @@
 "--- RC FILE PATH ---"
-let g:rcfile = "/home/aczombie/rice/vimrc/vim_wiki.vim"
-let g:vimwiki_projectfile = "/home/aczombie/Sync/Notes/Proyectos.md"
-let vimwikifolder = "/home/aczombie/Sync/Notes"
+let g:rcfile = "/home/acifuentes/vimrc/vim_wiki.vim"
+let g:vimwiki_projectfile = "/home/acifuentes/notes/proyectos.md"
+let vimwikifolder = "/home/acifuentes/notes"
+let g:zettelkasten = vimwikifolder."/"
+let g:zettelkasten_folder = ""
 
 call plug#begin()
 Plug 'vimwiki/vimwiki'
@@ -13,10 +15,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } "Poder colocar
 Plug 'junegunn/fzf.vim' "Poder colocar en negrita cosas en markdown
 Plug 'michal-h21/vim-zettel'
 Plug 'ayu-theme/ayu-vim'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-SpellCheck'
+Plug 'ferrine/md-img-paste.vim'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
-source /home/aczombie/rice/vimrc/global.vim
+source /home/acifuentes/vimrc/global.vim
 
 " VIM WIKI
 let g:vimwiki_list = [{'path': vimwikifolder,
@@ -44,8 +49,13 @@ augroup initvim
 augroup END
 
 " Zettelkasten
-let g:zettelkasten = vimwikifolder."/Zettelkasten/"
-command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
+"command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
+function! NewZettel(name)
+    "execute ":e" g:zettelkasten_folder . strftime("%Y%m%d%H%M") . "-". a:name .".md"
+    exe "normal! a[" . a:name . "](" . g:zettelkasten_folder . strftime("%Y%m%d%H%M") . "-". a:name .".md)\<Esc>"
+endfunction
+command! -nargs=1 NewZettel :call NewZettel(<f-args>)
+
 
 " RIPGREP
 let g:rg_highlight = 'true'
@@ -92,7 +102,7 @@ endfunction
 
 "--- KEYBINDINGS ---"
 nnoremap <M-l> :AddFZFLink<CR>
-nmap <A-CR> <Plug>VimwikiFollowLink
+nmap <CR> <Plug>VimwikiFollowLink
 nmap <leader>p :exec "edit ".g:vimwiki_projectfile<CR>
 map <F5> :setlocal spell! spelllang=en,es<CR>
 nnoremap <silent> , :<C-U>call OpenLinkInNumber()<CR>
@@ -108,8 +118,8 @@ nnoremap <leader>nz :NewZettel
 
 "--- AUTOCMD ---"
 augroup VimWikiNotes
-    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/aczombie/rice/scripts/vimWikiScripts/generate-vimwiki-diary-template '%'"
-    execute "au BufNewFile "vimwikifolder."/Zettelkasten/*.md :silent 0r !/home/aczombie/rice/scripts/vimWikiScripts/generate-vimwiki-zettelkasten-template '%'"
+    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
+    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
     "execute "au BufWritePost * silent !/media/files/bin/vimrc/gitAmend.sh ".getcwd()
     autocmd FileType vimwiki map <Leader>c :call ToggleCalendar()<CR>
     autocmd FileType vimwiki map <Leader>d :put =strftime('%a %d %b %Y')<CR>
@@ -131,3 +141,11 @@ hi clear VimwikiItalic
 hi def VimwikiBold term=bold cterm=bold gui=bold ctermfg=yellow guifg=#FFA759
 hi def VimwikiItalic ctermfg=green guifg=#95E6CB
 "hi! def link VimwikiBold Statement
+
+inoremap [a á
+inoremap [e é
+inoremap [i í
+inoremap [o ó
+inoremap [u ú
+inoremap ; ñ
+inoremap ;; ;
