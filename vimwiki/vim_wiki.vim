@@ -1,7 +1,7 @@
 "--- RC FILE PATH ---"
-let g:rcfile = "/home/acifuentes/vimrc/vim_wiki.vim"
-let g:vimwiki_projectfile = "/home/acifuentes/notes/proyectos.md"
-let vimwikifolder = "/home/acifuentes/notes"
+"let g:rcfile = "/home/acifuentes/vimrc/vim_wiki.vim"
+"let g:vimwiki_projectfile = $VIMNOTES_NOTES_FOLDER/proyectos.md
+let vimwikifolder = $VIMNOTES_NOTES_FOLDER
 let g:zettelkasten = vimwikifolder."/"
 let g:zettelkasten_folder = ""
 
@@ -18,10 +18,11 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-SpellCheck'
 Plug 'ferrine/md-img-paste.vim'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
-source /home/acifuentes/vimrc/global.vim
+source $DOTFILES_FOLDER/vimrc/default/global.vim
 
 " VIM WIKI
 let g:vimwiki_list = [{'path': vimwikifolder,
@@ -103,7 +104,7 @@ endfunction
 "--- KEYBINDINGS ---"
 nnoremap <M-l> :AddFZFLink<CR>
 nmap <CR> <Plug>VimwikiFollowLink
-nmap <leader>p :exec "edit ".g:vimwiki_projectfile<CR>
+"nmap <leader>p :exec "edit ".g:vimwiki_projectfile<CR>
 map <F5> :setlocal spell! spelllang=en,es<CR>
 nnoremap <silent> , :<C-U>call OpenLinkInNumber()<CR>
 let mapleader = "-"
@@ -118,8 +119,10 @@ nnoremap <leader>nz :NewZettel
 
 "--- AUTOCMD ---"
 augroup VimWikiNotes
-    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
-    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
+    "execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
+    "execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
+    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-diary-template '%'"
+    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-zettelkasten-template '%'"
     "execute "au BufWritePost * silent !/media/files/bin/vimrc/gitAmend.sh ".getcwd()
     autocmd FileType vimwiki map <Leader>c :call ToggleCalendar()<CR>
     autocmd FileType vimwiki map <Leader>d :put =strftime('%a %d %b %Y')<CR>
@@ -149,3 +152,26 @@ inoremap [o ó
 inoremap [u ú
 inoremap ; ñ
 inoremap ;; ;
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+nnoremap {  {zz
+nnoremap }  }zz
+nnoremap n  nzz
+nnoremap N  Nzz
+nnoremap [c [czz
+nnoremap ]c ]czz
+nnoremap [j <C-o>zz
+nnoremap ]j <C-i>zz
+nnoremap [s [szz
+nnoremap ]s ]szz
+
+" Resize splis on vim window resize
+autocmd VimResized * wincmd =
+
+" Breakindent
+set breakindent
+set breakindentopt=shift:2
+set showbreak=\\\\\

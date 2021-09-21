@@ -1,5 +1,5 @@
 "--- RC FILE PATH ---"
-let $RC_FOLDER = "/home/acifuentes/vimrc/salesforceIde"
+let $RC_FOLDER = "/home/acifuentes/Documents/vimrc/salesforceIde"
 
 "--- GLOBAL CONFIGURATIONS ---"
 source $RC_FOLDER/global/plugins.vim
