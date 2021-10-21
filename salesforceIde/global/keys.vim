@@ -158,3 +158,21 @@ lua <<EOF
       { key = "g?",                           cb = tree_cb("toggle_help") },
     }
 EOF
+
+" VIMSPECTOR
+" Mientras, dejare los mappings en "HUMAN"
+" https://github.com/puremourning/vimspector#mappings
+let mapleader = "-"
+nmap <F5> <Plug>VimspectorContinue
+nmap <F3> <Plug>VimspectorStop
+nmap <F4> <Plug>VimspectorRestart
+nmap <F6> <Plug>VimspectorPause
+nmap <F9> <Plug>VimspectorToggleBreakpoint
+nmap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
+nmap <F8> <Plug>VimspectorAddFunctionBreakpoint
+nmap <leader><F8> <Plug>VimspectorRunToCursor
+nmap <F10> <Plug>VimspectorStepOver
+nmap <F11> <Plug>VimspectorStepInto
+nmap <F12> <Plug>VimspectorStepOut
+
+nnoremap <leader>cl :<C-u>call       CocActionAsync('codeLensAction')<CR>

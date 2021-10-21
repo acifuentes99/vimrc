@@ -30,6 +30,7 @@ let g:vimwiki_list = [{'path': vimwikifolder,
                 \ 'ext': '.md',
                 \ 'links_space_char': '_',
                 \ 'nested_syntaxes': {'js': 'javascript', 'py': 'python'}}]
+let g:vimwiki_url_maxsave = 0
 let g:vimwiki_markdown_link_ext = 1
 let g:netrw_liststyle=3
 
@@ -174,4 +175,4 @@ autocmd VimResized * wincmd =
 " Breakindent
 set breakindent
 set breakindentopt=shift:2
-set showbreak=\\\\\
+set showbreak=↳
