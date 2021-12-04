@@ -6,7 +6,7 @@ let g:zettelkasten = vimwikifolder."/"
 let g:zettelkasten_folder = ""
 
 call plug#begin()
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', { 'branch' : 'master' }
 Plug 'junegunn/goyo.vim'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-surround' "Poder colocar en negrita cosas en markdown
@@ -19,12 +19,16 @@ Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-SpellCheck'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
 source $DOTFILES_FOLDER/vimrc/default/global.vim
 
 " VIM WIKI
+let g:vimwiki_global_ext = 0
+let g:vimwiki_key_mappings = { 'table_mappings': 0, }
 let g:vimwiki_list = [{'path': vimwikifolder,
                 \ 'syntax': 'markdown', 
                 \ 'ext': '.md',
@@ -122,12 +126,14 @@ nnoremap <leader>nz :NewZettel
 augroup VimWikiNotes
     "execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
     "execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
-    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-diary-template '%'"
-    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-zettelkasten-template '%'"
+    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !".vimwikifolder."/templates/diary.py '%'"
+    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !".vimwikifolder."/templates/zettelkasten.py '%'"
     "execute "au BufWritePost * silent !/media/files/bin/vimrc/gitAmend.sh ".getcwd()
     autocmd FileType vimwiki map <Leader>c :call ToggleCalendar()<CR>
     autocmd FileType vimwiki map <Leader>d :put =strftime('%a %d %b %Y')<CR>
     autocmd VimEnter * VimwikiIndex
+  autocmd filetype markdown silent! iunmap <buffer> <Tab>
+  autocmd filetype vimwiki silent! iunmap <buffer> <Tab>
     set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 augroup END
 
@@ -176,3 +182,10 @@ autocmd VimResized * wincmd =
 set breakindent
 set breakindentopt=shift:2
 set showbreak=↳
+
+
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<TAB>"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"

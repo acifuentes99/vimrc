@@ -33,6 +33,8 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'ayu-theme/ayu-vim'
 "Scala
 Plug 'puremourning/vimspector'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 " - FUNCIONAMIENTO - "
 "Plug 'tpope/vim-vinegar' "Abrir NerdTree con -

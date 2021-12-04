@@ -16,7 +16,7 @@ set hlsearch
 set ignorecase
 set mouse=a
 set nofixendofline
-set number relativenumber
+"set number relativenumber
 set so=7 "keep centered cursor line
 set spelllang=en,es
 set termguicolors 

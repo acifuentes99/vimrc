@@ -119,6 +119,23 @@ nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
 nnoremap <silent> <space>s  :<C-u>CocFzfListSymbols<CR>
 nnoremap <silent> <space>S  :<C-u>CocFzfListServices<CR>
 
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 "--- NVIM LUA TREE ---"
 lua <<EOF
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -176,3 +193,10 @@ nmap <F11> <Plug>VimspectorStepInto
 nmap <F12> <Plug>VimspectorStepOut
 
 nnoremap <leader>cl :<C-u>call       CocActionAsync('codeLensAction')<CR>
+
+" Snippets
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<C-TAB>"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"
+
