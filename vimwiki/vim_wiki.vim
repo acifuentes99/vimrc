@@ -31,6 +31,7 @@ let g:vimwiki_list = [{'path': vimwikifolder,
                 \ 'links_space_char': '_',
                 \ 'nested_syntaxes': {'js': 'javascript', 'py': 'python'}}]
 let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_url_maxsave = 0
 let g:netrw_liststyle=3
 
 " VIM ZETTLE
@@ -63,7 +64,6 @@ let g:rg_highlight = 'true'
 
 
 "--- UTILITY ---"
-
 " Agregar busqueda de FZF como link a nota actual
 function! HandleFZF(file)
     "let filename = fnameescape(fnamemodify(a:file, ":t"))
@@ -119,8 +119,6 @@ nnoremap <leader>nz :NewZettel
 
 "--- AUTOCMD ---"
 augroup VimWikiNotes
-    "execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
-    "execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
     execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-diary-template '%'"
     execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !".vimwikifolder."/templates/generate-vimwiki-zettelkasten-template '%'"
     "execute "au BufWritePost * silent !/media/files/bin/vimrc/gitAmend.sh ".getcwd()

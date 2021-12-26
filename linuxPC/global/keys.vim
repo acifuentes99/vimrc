@@ -170,3 +170,6 @@ lua <<EOF
       { key = "g?",                           cb = tree_cb("toggle_help") },
     }
 EOF
+
+
+nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>

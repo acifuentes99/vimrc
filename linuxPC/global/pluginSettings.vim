@@ -94,6 +94,23 @@ let mapleader = "-"
 map <Leader>p :call VimuxRunCommand("sfdx force:source:push")<CR>
 
 
+"let g:nvim_tree_special_files = { 'README.md': 0, 'Makefile': 1, 'MAKEFILE': 1 }
+let g:nvim_tree_special_files = [ 'README.md', 'Makefile', 'MAKEFILE' ]
+lua <<EOF
+require("nvim-web-devicons").set_icon {
+  cls = {
+    icon = "",
+    color = "#009ED5",
+    name = "apexcode"
+  },
+  xml = {
+    icon = "",
+    color = "#B96D3E",
+    name = "xml"
+  }
+}
+EOF
+
 " -- NVIM TREE -- "
 "let g:nvim_tree_tab_open = 1
 "let g:nvim_tree_disable_default_keybindings = 1
@@ -114,3 +131,7 @@ map <Leader>p :call VimuxRunCommand("sfdx force:source:push")<CR>
 "let g:completion_matching_ignore_case=1
 "let g:completion_menu_length=10
 "let g:completion_abbr_length=30
+
+
+"VIMSPECTOR
+let g:vimspector_enable_mappings = 'HUMAN'

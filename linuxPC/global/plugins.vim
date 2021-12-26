@@ -31,6 +31,7 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'romainl/Apprentice'
 Plug 'tomasiser/vim-code-dark'
 Plug 'ayu-theme/ayu-vim'
+Plug 'puremourning/vimspector'
 call plug#end()
 " - FUNCIONAMIENTO - "
 "Plug 'tpope/vim-vinegar' "Abrir NerdTree con -
