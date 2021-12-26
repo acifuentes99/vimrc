@@ -119,22 +119,17 @@ nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
 nnoremap <silent> <space>s  :<C-u>CocFzfListSymbols<CR>
 nnoremap <silent> <space>S  :<C-u>CocFzfListServices<CR>
 
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Centering when navigating
+nnoremap {  {zz
+nnoremap }  }zz
+nnoremap n  nzz
+nnoremap N  Nzz
+nnoremap [c [czz
+nnoremap ]c ]czz
+nnoremap [j <C-o>zz
+nnoremap ]j <C-i>zz
+nnoremap [s [szz
+nnoremap ]s ]szz
 
 "--- NVIM LUA TREE ---"
 lua <<EOF
@@ -175,28 +170,3 @@ lua <<EOF
       { key = "g?",                           cb = tree_cb("toggle_help") },
     }
 EOF
-
-" VIMSPECTOR
-" Mientras, dejare los mappings en "HUMAN"
-" https://github.com/puremourning/vimspector#mappings
-let mapleader = "-"
-nmap <F5> <Plug>VimspectorContinue
-nmap <F3> <Plug>VimspectorStop
-nmap <F4> <Plug>VimspectorRestart
-nmap <F6> <Plug>VimspectorPause
-nmap <F9> <Plug>VimspectorToggleBreakpoint
-nmap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
-nmap <F8> <Plug>VimspectorAddFunctionBreakpoint
-nmap <leader><F8> <Plug>VimspectorRunToCursor
-nmap <F10> <Plug>VimspectorStepOver
-nmap <F11> <Plug>VimspectorStepInto
-nmap <F12> <Plug>VimspectorStepOut
-
-nnoremap <leader>cl :<C-u>call       CocActionAsync('codeLensAction')<CR>
-
-" Snippets
-"let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<C-TAB>"
-" list all snippets for current filetype
-let g:UltiSnipsListSnippets="<c-l>"
-

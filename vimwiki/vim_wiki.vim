@@ -1,12 +1,12 @@
 "--- RC FILE PATH ---"
-let g:rcfile = "/home/acifuentes/vimrc/vim_wiki.vim"
-let g:vimwiki_projectfile = "/home/acifuentes/notes/proyectos.md"
-let vimwikifolder = "/home/acifuentes/notes"
+"let g:rcfile = "/home/acifuentes/vimrc/vim_wiki.vim"
+"let g:vimwiki_projectfile = $VIMNOTES_NOTES_FOLDER/proyectos.md
+let vimwikifolder = $VIMNOTES_NOTES_FOLDER
 let g:zettelkasten = vimwikifolder."/"
 let g:zettelkasten_folder = ""
 
 call plug#begin()
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', { 'branch' : 'master' }
 Plug 'junegunn/goyo.vim'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-surround' "Poder colocar en negrita cosas en markdown
@@ -18,17 +18,23 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-SpellCheck'
 Plug 'ferrine/md-img-paste.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 "--- GLOBAL CONFIGURATIONS ---"
-source /home/acifuentes/vimrc/global.vim
+source $DOTFILES_FOLDER/vimrc/default/global.vim
 
 " VIM WIKI
+let g:vimwiki_global_ext = 0
+let g:vimwiki_key_mappings = { 'table_mappings': 0, }
 let g:vimwiki_list = [{'path': vimwikifolder,
                 \ 'syntax': 'markdown', 
                 \ 'ext': '.md',
                 \ 'links_space_char': '_',
                 \ 'nested_syntaxes': {'js': 'javascript', 'py': 'python'}}]
+let g:vimwiki_url_maxsave = 0
 let g:vimwiki_markdown_link_ext = 1
 let g:netrw_liststyle=3
 
@@ -103,7 +109,7 @@ endfunction
 "--- KEYBINDINGS ---"
 nnoremap <M-l> :AddFZFLink<CR>
 nmap <CR> <Plug>VimwikiFollowLink
-nmap <leader>p :exec "edit ".g:vimwiki_projectfile<CR>
+"nmap <leader>p :exec "edit ".g:vimwiki_projectfile<CR>
 map <F5> :setlocal spell! spelllang=en,es<CR>
 nnoremap <silent> , :<C-U>call OpenLinkInNumber()<CR>
 let mapleader = "-"
@@ -118,12 +124,16 @@ nnoremap <leader>nz :NewZettel
 
 "--- AUTOCMD ---"
 augroup VimWikiNotes
-    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
-    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
+    "execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !/home/acifuentes/notes/templates/diary.py '%'"
+    "execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !/home/acifuentes/notes/templates/zettlekasten.py '%'"
+    execute "au BufNewFile "vimwikifolder."/diary/*.md :silent 0r !".vimwikifolder."/templates/diary.py '%'"
+    execute "au BufNewFile "vimwikifolder."/*.md :silent 0r !".vimwikifolder."/templates/zettelkasten.py '%'"
     "execute "au BufWritePost * silent !/media/files/bin/vimrc/gitAmend.sh ".getcwd()
     autocmd FileType vimwiki map <Leader>c :call ToggleCalendar()<CR>
     autocmd FileType vimwiki map <Leader>d :put =strftime('%a %d %b %Y')<CR>
     autocmd VimEnter * VimwikiIndex
+  autocmd filetype markdown silent! iunmap <buffer> <Tab>
+  autocmd filetype vimwiki silent! iunmap <buffer> <Tab>
     set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 augroup END
 
@@ -149,3 +159,33 @@ inoremap [o ó
 inoremap [u ú
 inoremap ; ñ
 inoremap ;; ;
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+nnoremap {  {zz
+nnoremap }  }zz
+nnoremap n  nzz
+nnoremap N  Nzz
+nnoremap [c [czz
+nnoremap ]c ]czz
+nnoremap [j <C-o>zz
+nnoremap ]j <C-i>zz
+nnoremap [s [szz
+nnoremap ]s ]szz
+
+" Resize splis on vim window resize
+autocmd VimResized * wincmd =
+
+" Breakindent
+set breakindent
+set breakindentopt=shift:2
+set showbreak=↳
+
+
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<TAB>"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"

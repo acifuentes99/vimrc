@@ -67,17 +67,3 @@ function! TabNewWithScratchBuffer()
     setlocal noswapfile
 endfunction
 
-" Duplicate curren vim Tab
-command! -bar DuplicateTabpane
-      \ let s:sessionoptions = &sessionoptions |
-      \ try |
-      \   let &sessionoptions = 'blank,help,folds,winsize,localoptions' |
-      \   let s:file = tempname() |
-      \   execute 'mksession ' . s:file |
-      \   tabnew |
-      \   execute 'source ' . s:file |
-      \ finally |
-      \   silent call delete(s:file) |
-      \   let &sessionoptions = s:sessionoptions |
-      \   unlet! s:file s:sessionoptions |
-      \ endtry

@@ -72,42 +72,34 @@ set signcolumn=number
 
 "--- SALESFORCE CUSTOM CONFIG ---"
 "--- AURA ---"
-augroup set_filetype
-    :autocmd!
-    :autocmd BufEnter *.cmp,*.evt,*.design :set filetype=html " Salesforce files
-    :autocmd BufEnter *.tsx :set filetype=typescript.tsx
-    :autocmd BufEnter *.jsx :set filetype=javascript.jsx
-augroup END
-
-"--- APEX ---"
-augroup filetype_apexcode
-    :autocmd!
-    ":autocmd FileType apexcode* :setlocal shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=0 foldlevelstart=0
-    :autocmd FileType apexcode* :setlocal shiftwidth=4 tabstop=4
-augroup END
-
-au BufNewFile,BufRead *.cmp set filetype=html
-au BufNewFile,BufRead *.cls set filetype=apexcode
-au BufNewFile,BufRead *.trigger set filetype=apexcode
+"augroup set_filetype
+"    :autocmd!
+"    :autocmd BufEnter *.cmp,*.evt,*.design :set filetype=html " Salesforce files
+"    :autocmd BufEnter *.tsx :set filetype=typescript.tsx
+"    :autocmd BufEnter *.jsx :set filetype=javascript.jsx
+"augroup END
+"
+""--- APEX ---"
+"augroup filetype_apexcode
+"    :autocmd!
+"    :autocmd FileType apexcode* :setlocal shiftwidth=4 tabstop=4 foldmethod=indent foldlevel=0 foldlevelstart=0
+"augroup END
+"
+"au BufNewFile,BufRead *.cmp set filetype=html
+"au BufNewFile,BufRead *.cls set filetype=apexcode
 
 " -- VIMUX -- "
-" * leader p : push source to org
-" * leader o : copy to clipboard scratch org url
 let g:VimuxUseNearest = 1
 let mapleader = "-"
-let vimux_open_org_command = "sfdx force:org:open -r | grep -Eo '(http|https)://.*' | xclip -i && echo 'Scratch org url copied to clipboard'"
 map <Leader>p :call VimuxRunCommand("sfdx force:source:push")<CR>
-map <Leader>o :call VimuxRunCommand(open_org_command)<CR>
 
 
 " -- NVIM TREE -- "
-"let g:open_on_tab = 1
+"let g:nvim_tree_tab_open = 1
 "let g:nvim_tree_disable_default_keybindings = 1
-lua <<EOF
-require'nvim-tree'.setup {
-      open_on_tab         = true
-}
-EOF
+"lua <<EOF
+"    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+"EOF
 "lua require('~/home/acifuentes/.config/nvim/luaconfig2')
 "lua require('~/.config/nvim/luaconfig')
 "sign define LspDiagnosticsSignError text=🔴
@@ -122,16 +114,3 @@ EOF
 "let g:completion_matching_ignore_case=1
 "let g:completion_menu_length=10
 "let g:completion_abbr_length=30
-"
-" VIMSPECTOR
-let g:vimspector_base_dir=expand( '$HOME/.vim/vimspector-config' )
-let g:vimspector_sign_priority = {
-\  'vimspectorPC':            200,
-\  'vimspectorPCBP':          200,
-\  'vimspectorBP':            9,
-\  'vimspectorBPCond':        9,
-\  'vimspectorBPDisabled':    9,
-\  'vimspectorCurrentThread': 200
-\}
-
-
