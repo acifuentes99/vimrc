@@ -7,8 +7,8 @@
 
 " Vim Operations
 let mapleader = "-"
-nnoremap ZZ :wa!<CR>
-nnoremap __ :wqa<CR>:
+nnoremap <leader>w :wa!<CR>
+nnoremap <leader>q :wqa<CR>:
 nnoremap <A-c> :tabclose<CR>
 nnoremap <A-x> :close<CR>
 nnoremap <C-Y> :bprevious<CR>
@@ -60,10 +60,12 @@ nnoremap <A-w> :Windows<CR>
 nnoremap <A-f> :Rg<CR>
 
 
-" SWAP VIM WINDOWS WITH '-ww'
+" SWAP VIM WINDOWS WITH ',ww'
+let mapleader = ","
 nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
 nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <leader>z <c-w>_<c-w>|
 
 " Visual mode pressing * or # searches for the current selection "
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR> 
@@ -75,3 +77,5 @@ nnoremap <A-t> :call TabNewWithScratchBuffer()<CR>
 " Dont know.. appears something with terminal mode
 tnoremap <expr> <C-v> '<C-\><C-N>pi'
 
+
+let mapleader = "-"

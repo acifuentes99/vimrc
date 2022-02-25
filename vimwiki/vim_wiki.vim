@@ -189,3 +189,24 @@ set showbreak=↳
 let g:UltiSnipsExpandTrigger="<TAB>"
 " list all snippets for current filetype
 let g:UltiSnipsListSnippets="<c-l>"
+
+
+set clipboard+=unnamedplus
+let g:clipboard = {
+          \   'name': 'win32yank-wsl',
+          \   'copy': {
+          \      '+': 'win32yank.exe -i --crlf',
+          \      '*': 'win32yank.exe -i --crlf',
+          \    },
+          \   'paste': {
+          \      '+': 'win32yank.exe -o --lf',
+          \      '*': 'win32yank.exe -o --lf',
+          \   },
+          \   'cache_enabled': 0,
+          \ }
+
+"Autosave leaving insert mode
+augroup AUTOSAVE
+  au!
+  autocmd InsertLeave,TextChanged,FocusLost * silent! write
+augroup END
