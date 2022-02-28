@@ -25,7 +25,12 @@ set wildmenu "tab on menu
 set wildmode=longest:full
 set winaltkeys=no "Utilizar el Alt para mapings
 set wrap
-set shortmess-=F
+"set shortmess-=F
+
+set nobackup
+set nowritebackup
+set shortmess+=c
+set cmdheight=2
 
 "--- OTHER SETTINGS ---"
 filetype plugin indent on
@@ -81,22 +86,33 @@ set showbreak=↳
 "ab json %!python -m json.tool
 
 " WSL clipbaord
-set clipboard+=unnamedplus
-let g:clipboard = {
-          \   'name': 'win32yank-wsl',
-          \   'copy': {
-          \      '+': 'win32yank.exe -i --crlf',
-          \      '*': 'win32yank.exe -i --crlf',
-          \    },
-          \   'paste': {
-          \      '+': 'win32yank.exe -o --lf',
-          \      '*': 'win32yank.exe -o --lf',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
+
+if (IsWSL())
+    set clipboard+=unnamedplus
+    let g:clipboard = {
+              \   'name': 'win32yank-wsl',
+              \   'copy': {
+              \      '+': 'win32yank.exe -i --crlf',
+              \      '*': 'win32yank.exe -i --crlf',
+              \    },
+              \   'paste': {
+              \      '+': 'win32yank.exe -o --lf',
+              \      '*': 'win32yank.exe -o --lf',
+              \   },
+              \   'cache_enabled': 0,
+              \ }
+endif
 
 "Autosave leaving insert mode
 augroup AUTOSAVE
   au!
   autocmd InsertLeave,TextChanged,FocusLost * silent! write
 augroup END
+
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif

@@ -1,6 +1,6 @@
 "--- GLOBAL CONFIGURATIONS ---"
-source $DOTFILES_VIMRC/global/plugins.vim
-source $DOTFILES_VIMRC/global/settings.vim
-source $DOTFILES_VIMRC/global/pluginSettings.vim
-source $DOTFILES_VIMRC/global/utils.vim
-source $DOTFILES_VIMRC/global/keys.vim
+source $HOME/.config/nvim/vimrc/linuxPC/global/plugins.vim
+source $HOME/.config/nvim/vimrc/linuxPC/global/settings.vim
+source $HOME/.config/nvim/vimrc/linuxPC/global/pluginSettings.vim
+source $HOME/.config/nvim/vimrc/linuxPC/global/utils.vim
+source $HOME/.config/nvim/vimrc/linuxPC/global/keys.vim
