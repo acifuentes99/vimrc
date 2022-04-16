@@ -5,8 +5,6 @@
 "   * vim-windowswap
 "   * Vim Utils (util custom functions)
 
-"--- DEFAULT REMAPPINGS ---"
-nnoremap ZZ :wa!<CR>
 
 "--- CTRL KEYSTROKES (FAST ACCESS) ---"
 nnoremap <C-Y> :bprevious<CR>
@@ -18,6 +16,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
 
 "--- ALT KEYSTROKES (FAST OPERATIONS) ---"
 nnoremap <A-c> :tabclose<CR>
@@ -41,37 +40,51 @@ nnoremap <A-b> :Buffers<CR>
 nnoremap <A-w> :Windows<CR>
 nnoremap <A-f> :Rg<CR>
 
-"--- - LEADER ---"
+
+"--- '-' LEADER ---"
 let mapleader = "-"
 " Vim Operations
 nnoremap <leader>w :wa!<CR>
-nnoremap <leader>q :wqa<CR>:
+nnoremap <leader>q :qa!<CR>
 " File Tree and Explorer
 nnoremap <leader>l :Lex<CR>
-nnoremap <leader>t :NvimTreeFocus<CR>
+nnoremap <leader>t :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-" SWAP VIM WINDOWS WITH '-ww'
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
-nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+" Simplifications
+nnoremap <leader>8 :let @+ = expand("%")<CR>
+nnoremap <leader>9 :let @+ = expand("%:t:r")<CR>
+nnoremap <leader>0 :echo @%<CR>
+" Vimux
+nnoremap <Leader>p :call VimuxRunCommand("sfdx force:source:push")<CR>
+nnoremap <Leader>o :call VimuxRunCommand(open_org_command)<CR>
+nnoremap <leader>sv :source $VIMRC<CR>
 
-"--- , LEADER ---"
+
+"--- ',' LEADER ---"
 let mapleader = ","
 " QUICKFIX
 noremap <leader>j :cn<CR>
 noremap <leader>k :cp<CR>
 " FZF VIM - shortcut operations
 " Use word or visual selection to open search
-noremap <leader>p yiw:All '<C-r>*'<CR>
-noremap <leader>f yiw:Rgg <C-r>*<CR>
-let mapleader = "-"
-"noremap<A-S-k> <A-S-j> :cn<CR>
-"noremap <A-S-k> :cp<CR>
+noremap <leader>p yiw:All '<C-r>0'<CR>
+noremap <leader>f yiw:Rgg <C-r>0<CR>
+" Replace matching Word in visual mode
+nnoremap <leader>r yiw:%s/<C-r>"//g<left><left>
+vnoremap <leader>r :s/<C-r>"//g<left><left>
+" SWAP VIM WINDOWS WITH ',ww'
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+" Zoom current split
+nnoremap <silent> <leader>z <C-W>_\|<C-W>\|
+" Restart zooms
+nnoremap <silent> <leader>= <C-W>=
+" Shortcuts Vim
+nnoremap <silent> <leader>n :set invnumber<CR> 
 
-" Simplifications
-nnoremap <leader>8 :let @+ = expand("%")<CR>
-nnoremap <leader>9 :let @+ = expand("%:t:r")<CR>
-nnoremap <leader>0 :echo @%<CR>
+
+"--- OTHER MAPPINGS ---"
 
 " SpellChecker
 imap <F8> 1z=
@@ -102,6 +115,8 @@ inoremap [i í
 inoremap [o ó
 inoremap [u ú
 
+nnoremap <nowait><silent> <space> :noh<CR>
+
 "--- COC NVIM ---"
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -109,15 +124,16 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 inoremap <silent><expr> <c-space> coc#refresh()
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>a  :<C-u>CocFzfListDiagnostics<CR>
-nnoremap <silent> <space>e  :<C-u>CocFzfListExtensions<CR>
-nnoremap <silent> <space>l  :<C-u>CocFzfListLocation<CR>
-nnoremap <silent> <space>o  :<C-u>CocFzfListOutline<CR>
-nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
-nnoremap <silent> <space>s  :<C-u>CocFzfListSymbols<CR>
-nnoremap <silent> <space>S  :<C-u>CocFzfListServices<CR>
+" not usable, because space is used
+"nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+"nnoremap <silent> <space>a  :<C-u>CocFzfListDiagnostics<CR>
+"nnoremap <silent> <space>e  :<C-u>CocFzfListExtensions<CR>
+"nnoremap <silent> <space>l  :<C-u>CocFzfListLocation<CR>
+"nnoremap <silent> <space>o  :<C-u>CocFzfListOutline<CR>
+"nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
+"nnoremap <silent> <space>s  :<C-u>CocFzfListSymbols<CR>
+"nnoremap <silent> <space>S  :<C-u>CocFzfListServices<CR>
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
@@ -136,47 +152,7 @@ endfunction
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-"--- NVIM LUA TREE ---"
-lua <<EOF
-    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-    -- default mappings
-    vim.g.nvim_tree_bindings = {
-      { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
-      { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
-      { key = "<C-v>",                        cb = tree_cb("vsplit") },
-      { key = "<C-x>",                        cb = tree_cb("split") },
-      { key = "<C-t>",                        cb = tree_cb("tabnew") },
-      { key = "<",                            cb = tree_cb("prev_sibling") },
-      { key = ">",                            cb = tree_cb("next_sibling") },
-      { key = "P",                            cb = tree_cb("parent_node") },
-      { key = "<BS>",                         cb = tree_cb("close_node") },
-      { key = "<S-CR>",                       cb = tree_cb("close_node") },
-      { key = "<Tab>",                        cb = tree_cb("preview") },
-      { key = "K",                            cb = tree_cb("first_sibling") },
-      { key = "J",                            cb = tree_cb("last_sibling") },
-      { key = "I",                            cb = tree_cb("toggle_ignored") },
-      { key = "H",                            cb = tree_cb("toggle_dotfiles") },
-      { key = "R",                            cb = tree_cb("refresh") },
-      { key = "a",                            cb = tree_cb("create") },
-      { key = "d",                            cb = tree_cb("remove") },
-      { key = "r",                            cb = tree_cb("rename") },
-      { key = "<C-r>",                        cb = tree_cb("full_rename") },
-      { key = "x",                            cb = tree_cb("cut") },
-      { key = "c",                            cb = tree_cb("copy") },
-      { key = "p",                            cb = tree_cb("paste") },
-      { key = "y",                            cb = tree_cb("copy_name") },
-      { key = "Y",                            cb = tree_cb("copy_path") },
-      { key = "gy",                           cb = tree_cb("copy_absolute_path") },
-      { key = "[c",                           cb = tree_cb("prev_git_item") },
-      { key = "]c",                           cb = tree_cb("next_git_item") },
-      --{ key = "-",                            cb = tree_cb("dir_up") },
-      --{ key = "s",                            cb = tree_cb("system_open") },
-      { key = "q",                            cb = tree_cb("close") },
-      { key = "g?",                           cb = tree_cb("toggle_help") },
-    }
-EOF
-
-" VIMSPECTOR
+"--- VIMSPECTOR ---"
 " Mientras, dejare los mappings en "HUMAN"
 " https://github.com/puremourning/vimspector#mappings
 let mapleader = "-"
@@ -194,9 +170,10 @@ nmap <F12> <Plug>VimspectorStepOut
 
 nnoremap <leader>cl :<C-u>call       CocActionAsync('codeLensAction')<CR>
 
-" Snippets
-"let g:UltiSnipsExpandTrigger="<tab>"
+
+"--- SNIPPETS ---"
 let g:UltiSnipsExpandTrigger="<C-TAB>"
-" list all snippets for current filetype
 let g:UltiSnipsListSnippets="<c-l>"
 
+iabbrev cu cuprum
+iabbrev Cu Cuprum
