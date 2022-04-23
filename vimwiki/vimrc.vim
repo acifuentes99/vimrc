@@ -40,8 +40,9 @@ colorscheme ayu
 hi Normal guibg=NONE ctermbg=NONE
 hi clear VimwikiBold
 hi clear VimwikiItalic
-hi def VimwikiBold term=bold cterm=bold gui=bold ctermfg=yellow guifg=#FFA759
+hi def VimwikiBold term=bold cterm=bold gui=bold ctermfg=yellow guifg=#EBE5C5
 hi def VimwikiItalic ctermfg=green guifg=#95E6CB
+let g:vimwiki_hl_headers = 1
 
 "--- VIM SETTINGS ---"
 set mouse=a
@@ -298,6 +299,7 @@ nnoremap <silent> <leader>z <C-W>_\|<C-W>\|
 nnoremap <silent> <leader>= <C-W>=
 " Shortcuts Vim
 nnoremap <silent> <leader>n :set invnumber<CR>
+nnoremap <leader>w :set wrap!<CR>
 
 " Final leader key
 let mapleader = "-"

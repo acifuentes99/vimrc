@@ -19,14 +19,13 @@ set nofixendofline
 "set number relativenumber
 set so=7 "keep centered cursor line
 set spelllang=en,es
-set termguicolors 
+set termguicolors
 set updatetime=250
 set wildmenu "tab on menu
 set wildmode=longest:full
 set winaltkeys=no "Utilizar el Alt para mapings
 set wrap
 "set shortmess-=F
-
 set nobackup
 set nowritebackup
 set shortmess+=c
@@ -35,6 +34,18 @@ set cmdheight=2
 "--- OTHER SETTINGS ---"
 filetype plugin indent on
 syntax on
+
+" Breakindent
+set breakindent
+set breakindentopt=shift:2
+set showbreak=↳
+
+" Recently vim can merge signcolumn and number column into one
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 "--- TAB & SPACES (DEPENDS OF FILE IN THE FUTURE) ---"
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -56,14 +67,8 @@ else
 	endfunction
 endif
 
-noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
-noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
-inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
-inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
-
-
 "--- THEMING ---"
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 hi vertsplit ctermfg=238 ctermbg=238 term=NONE
 set background=dark
 let ayucolor="mirage"
@@ -72,21 +77,16 @@ hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red
 hi SpellBad gui=undercurl
 
+" Lightline (status bar)
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
 
-
-" Breakindent
-set breakindent
-set breakindentopt=shift:2
-set showbreak=↳
-
-
+" TODO : Some command for parsing JSON on vim, but not
+" this autocmd from hell
 "ab json %!python -m json.tool
 
 " WSL clipbaord
-
 if (IsWSL())
     set clipboard+=unnamedplus
     let g:clipboard = {
@@ -103,16 +103,9 @@ if (IsWSL())
               \ }
 endif
 
+
 "Autosave leaving insert mode
 augroup AUTOSAVE
   au!
   autocmd InsertLeave,TextChanged,FocusLost * silent! write
 augroup END
-
-
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif

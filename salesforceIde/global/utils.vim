@@ -30,6 +30,7 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -37,6 +38,7 @@ function! HasPaste()
     endif
     return ''
 endfunction
+
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -59,6 +61,7 @@ function! <SID>BufcloseCloseIt()
 	 endif
 endfunction
 
+
 " Scratch Buffer
 function! TabNewWithScratchBuffer()
     execute "tabnew" 
@@ -67,7 +70,8 @@ function! TabNewWithScratchBuffer()
     setlocal noswapfile
 endfunction
 
-" Duplicate curren vim Tab
+
+" Duplicate current vim Tab
 command! -bar DuplicateTabpane
       \ let s:sessionoptions = &sessionoptions |
       \ try |
@@ -81,6 +85,7 @@ command! -bar DuplicateTabpane
       \   let &sessionoptions = s:sessionoptions |
       \   unlet! s:file s:sessionoptions |
       \ endtry
+
 
 function! IsWSL()
   if has("unix")

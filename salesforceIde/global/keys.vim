@@ -6,6 +6,12 @@
 "   * Vim Utils (util custom functions)
 
 
+" GUI Keybindings font sizing
+noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
+
 "--- CTRL KEYSTROKES (FAST ACCESS) ---"
 nnoremap <C-Y> :bprevious<CR>
 nnoremap <C-O> :bnext<C>
@@ -55,7 +61,7 @@ nnoremap <leader>8 :let @+ = expand("%")<CR>
 nnoremap <leader>9 :let @+ = expand("%:t:r")<CR>
 nnoremap <leader>0 :echo @%<CR>
 " Vimux
-nnoremap <Leader>p :call VimuxRunCommand("sfdx force:source:push")<CR>
+nnoremap <Leader>p :call VimuxRunCommand("sfdx force:source:legacy:push")<CR>
 nnoremap <Leader>o :call VimuxRunCommand(open_org_command)<CR>
 nnoremap <leader>sv :source $VIMRC<CR>
 

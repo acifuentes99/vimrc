@@ -59,21 +59,12 @@ endfunction
 command! -nargs=* -bang Rgg call RipgrepFzf(<q-args>, <bang>0)
 
 
-"--- SCRATCH BUFFER ---"
-function! TabNewWithScratchBuffer()
-    execute "tabnew" 
-    set buftype=nofile
-    set bufhidden=hide
-    setlocal noswapfile
-endfunction
-nnoremap <A-t> :call TabNewWithScratchBuffer()<CR>
-
-
 "--- COC NVIM ---"
-set nobackup
-set nowritebackup
-set shortmess+=c
-set signcolumn=number
+" TODO : This configs should be on vim configs
+"set nobackup
+"set nowritebackup
+"set shortmess+=c
+"set signcolumn=number
 
 
 "--- SALESFORCE CUSTOM CONFIG ---"
