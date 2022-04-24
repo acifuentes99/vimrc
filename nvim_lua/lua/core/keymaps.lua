@@ -91,13 +91,16 @@ map('n', '<A-e>', ':NvimTreeFindFile<CR>')      -- search file
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
--- FZF
-map('n', '<A-p>', ':FzfLua files<CR>')
-map('n', '<A-h>', ':FzfLua history<CR>')
-map('n', '<A-b>', ':FzfLua buffers<CR>')
-map('n', '<A-w>', ':FzfLua windows<CR>')
-map('n', '<A-f>', ':FzfLua grep_project<CR>')
-map('n', '<A-c>', ':FzfLua commands<CR>')
+-- Vim clap - Fuzzy Search
+map('n', '<A-p>', ':Clap files<CR>')
+map('n', '<A-h>', ':Clap history<CR>')
+map('n', '<A-b>', ':Clap buffers<CR>')
+map('n', '<A-w>', ':Clap windows<CR>')
+map('n', '<A-f>', ':Clap grep<CR>')
+map('n', '<A-c>', ':Clap command<CR>')
+map('n', '<A-y>', ':Clap yanks<CR>')
+map('n', '<A-q>', ':Clap quickfix<CR>')
+map('n', '<A-m>', ':Clap maps<CR>')
 
 -- LSP mappings
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")

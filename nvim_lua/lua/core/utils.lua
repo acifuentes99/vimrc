@@ -1,7 +1,9 @@
 local api = vim.api
-
 local M = {}
 
+----------------------------------------------------------
+-- New tab: Scratch Buffer
+-----------------------------------------------------------
 function M.tabNewWithScratchBuffer()
   api.nvim_command('tabnew') -- equivalent to :enew
   vim.bo.buftype='nofile' -- set the current buffer's (buffer 0) buftype to nofile
@@ -17,9 +19,10 @@ vim.api.nvim_create_user_command('TabNewWithScratchBuffer', function()
 end, { nargs = 0 })
 -- :command! -nargs=1 Upper echo toupper(<q-args>)
 
--- VISUAL SELECTION
--- Press Search, then highlight all matches in file
+----------------------------------------------------------
+-- Visual Selection search highlight
 -- TODO : Migrate to Lua
+-----------------------------------------------------------
 vim.cmd [[
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str

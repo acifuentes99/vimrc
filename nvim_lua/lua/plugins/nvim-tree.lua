@@ -16,7 +16,39 @@
 
 -- Global options
 local g = vim.g
+-----------------------------------------------------------
+-- Nvim Dev Icons
+-----------------------------------------------------------
+local status_ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
+if not status_ok then
+  return
+end
 
+nvim_web_devicons.setup {
+  override = {
+    zsh = {
+      icon = "",
+      color = "#428850",
+      cterm_color = "65",
+      name = "Zsh"
+    },
+    cls = {
+      icon = "",
+      color = "#34a5d9",
+      name = "apexcode"
+    },
+    xml = {
+      icon = "",
+      color = "#c25955",
+      name = "xml"
+    },
+  },
+  default = true
+}
+
+-----------------------------------------------------------
+-- Nvim Tree
+-----------------------------------------------------------
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_git_hl = 1
 g.nvim_tree_respect_buf_cwd = 1

@@ -77,3 +77,6 @@ autocmd('InsertLeave,TextChanged,FocusLost', {
   pattern = '*',
   command = 'silent! write'
 })
+
+-- Set .cmp as Apexcode files
+vim.cmd [[ autocmd BufNewFile,BufRead *.cls set filetype=apexcode ]]
