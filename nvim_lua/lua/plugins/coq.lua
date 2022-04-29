@@ -22,6 +22,7 @@ g.coq_settings = {
   },
 }
 
+      --recommended = false
 -- LSP Activation
 -- lsp.apexcode.setup(coq.lsp_ensure_capabilities{})
 local coq = require('coq')

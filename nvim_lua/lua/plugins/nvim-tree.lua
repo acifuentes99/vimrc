@@ -2,18 +2,6 @@
 -- File manager configuration file
 -----------------------------------------------------------
 
--- Plugin: nvim-tree
--- url: https://github.com/kyazdani42/nvim-tree.lua
-
--- Keybindings are defined in `core/keymaps.lua`:
--- https://github.com/kyazdani42/nvim-tree.lua#keybindings
-
--- Note: options under the g: command should be set BEFORE running the
--- setup function: https://github.com/kyazdani42/nvim-tree.lua#setup
--- Default options ARE NOT included.
--- See: `:help NvimTree`
-
-
 -- Global options
 local g = vim.g
 -----------------------------------------------------------
@@ -109,13 +97,11 @@ nvim_tree.setup {
   open_on_setup = true,
   open_on_setup_file = true,
   open_on_tab = true,
-  auto_close = false,
   update_cwd = true,
   view = {
       width = 30,
       height = 30,
       side = 'left',
-      auto_resize = false,
       preserve_window_proportions = false,
       number = false,
       relativenumber = false,

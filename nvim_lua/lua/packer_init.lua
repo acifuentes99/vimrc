@@ -47,8 +47,6 @@ return packer.startup(function(use)
   use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', } }
   -- Indent line
   use 'lukas-reineke/indent-blankline.nvim'
-  -- Autopair
-  --use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end }
   -- Icons
   use 'kyazdani42/nvim-web-devicons'
   -- Tag viewer
@@ -59,16 +57,23 @@ return packer.startup(function(use)
   use 'navarasu/onedark.nvim'
   use 'tanvirtin/monokai.nvim'
   use { 'rose-pine/neovim', as = 'rose-pine' }
+  use { 'Shatur/neovim-ayu' }
   -- LSP
   use 'neovim/nvim-lspconfig'
   use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" }})
   -- Autocomplete - COQ Nvim
-  use { 'ms-jpq/coq_nvim' }
-  use 'ms-jpq/coq.artifacts'
+  --use { 'ms-jpq/coq_nvim' }
+  --use 'ms-jpq/coq.artifacts'
   -- Statusline
   use { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
+  -- Vim Tabs
+  use 'nanozuki/tabby.nvim'
+  -- Marks on line number
+  use 'chentau/marks.nvim'
+  -- Diff View (like VS Code)
+  use 'sindrets/diffview.nvim'
   -- git labels
-  use {
+    use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -77,6 +82,9 @@ return packer.startup(function(use)
   }
   -- Vim Clap - Fuzzy Finding
   use 'liuchengxu/vim-clap'
+  -- Vim FZF (In case of missing functions in Clap)
+  use 'junegunn/fzf'
+  use 'junegunn/fzf.vim'
   -- Dashboard (start screen)
   use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
   -- Tmux and Vim integration
@@ -84,7 +92,7 @@ return packer.startup(function(use)
     config = function()
       require("tmux").setup({
         copy_sync = {
-          enable = true,
+          enable = false,
         },
         navigation = {
           enable_default_keybindings = true,

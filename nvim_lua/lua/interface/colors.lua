@@ -1,27 +1,53 @@
 -----------------------------------------------------------
 -- Color schemes configuration file
 -----------------------------------------------------------
+-- TODO : Per Theme configurations/setups, then enable for all plugins
 
--- See: https://github.com/brainfucksec/neovim-lua#appearance
-
--- Load nvim color scheme:
--- Change the "require" values with your color scheme
--- Available color schemes: onedark, monokai, rose-pine
-local status_ok, color_scheme = pcall(require, 'onedark')
+local status_ok, color_scheme = pcall(require, 'ayu')
 if not status_ok then
   return
 end
 
+color_scheme.setup({
+  mirage = true,
+  overrides = {}
+})
+color_scheme.colorscheme()
+
 -- OneDark styles: dark, darker, cool, deep, warm, warmer, light
-require('onedark').setup {
-  style = 'darker',
-  colors = { fg = '#b2bbcc' }, --default: #a0a8b7
-}
-require('onedark').load()
+--require('onedark').setup {
+--  style = 'darker',
+--  colors = { fg = '#b2bbcc' }, --default: #a0a8b7
+--}
+--require('onedark').load()
 
 -- statusline color schemes:
 -- import with: require('colors').colorscheme_name
 local M = {}
+
+-- Theme : Ayu
+-- Colors: https://github.com/Shatur/neovim-ayu/blob/master/lua/ayu/colors.lua
+M.ayu_dark = {
+  bg = '#11151C',
+  fg = '#CBCCC6',
+  pink = '#D2A6FF',
+  green = '#AAD94C',
+  cyan = '#39BAE6',
+  yellow = '#FFB454',
+  orange = '#FF8F40',
+  red = '#F07178',
+}
+
+M.ayu_mirage = {
+  bg = '#171B24',
+  fg = '#CBCCC6',
+  pink = '#DFBFF',
+  green = '#D5FF80',
+  cyan = '#5CCFE6',
+  yellow = '#FFD173',
+  orange = '#FFAD66',
+  red = '#F28779',
+}
 
 -- Theme: OneDark (dark)
 -- Colors: https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/palette.lua

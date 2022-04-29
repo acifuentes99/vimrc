@@ -26,7 +26,7 @@ map('', '<right>', '<nop>')
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
 
--- Clear search highlighting with <leader> and c
+-- Clear search highlighting with <space>
 map('n', '<space>', ':nohl<CR>')
 
 -- Change split orientation
@@ -65,23 +65,34 @@ map('n', '<A-5>', '5gt')
 map('n', '<A-6>', '6gt')
 map('n', '<A-7>', '7gt')
 map('n', '<A-8>', '8gt')
+map('n', '<leader>z', '<C-W>_|<C-W>|')  -- zoom current buffer
+map('n', '<leader>=', '<C-W>=')         -- reset zooms
 
 -- Quickfix
 map('n', '<A-C-j>', ':cn<CR>')
 map('n', '<A-C-k>', ':cp<CR>')
 
--- Visual Selection Search
-map('v', '*', ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
-map('v', '#', ":<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>")
+-- Quick settings
+map('n', '<leader>n', ':set invnumber<CR>') -- toggle line numbers
+
+vim.g.mapleader = '-'
+
+--- Filename Simplifications to Clipboard
+map('n', '<leader>8', [[:let @+ = expand("%")<CR>]])      -- Copy absolute path to clipboard
+map('n', '<leader>9', [[:let @+ = expand("%:t:r")<CR>]])  -- Copy file name to clipboard
+map('n', '<leader>0', [[:echo @%<CR>]])                   -- Print file path
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
 
+-- Visual Selection Search
+map('v', '*', ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
+map('v', '#', ":<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>")
+
 -- Terminal mappings
 map('n', '<C-t>', ':Term<CR>', { noremap = true })  -- open
 map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
-vim.g.mapleader = '-'
 
 -- NvimTree
 map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
@@ -91,16 +102,28 @@ map('n', '<A-e>', ':NvimTreeFindFile<CR>')      -- search file
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
--- Vim clap - Fuzzy Search
+---- Vim clap - Fuzzy Search
 map('n', '<A-p>', ':Clap files<CR>')
 map('n', '<A-h>', ':Clap history<CR>')
 map('n', '<A-b>', ':Clap buffers<CR>')
 map('n', '<A-w>', ':Clap windows<CR>')
 map('n', '<A-f>', ':Clap grep<CR>')
+map('n', '<A-C-f>', ':GFiles?<CR>')
 map('n', '<A-c>', ':Clap command<CR>')
 map('n', '<A-y>', ':Clap yanks<CR>')
 map('n', '<A-q>', ':Clap quickfix<CR>')
 map('n', '<A-m>', ':Clap maps<CR>')
+-- Vim clap - Fuzzy Search
+--map('n', '<A-p>',   ':Files<CR>')
+--map('n', '<A-h>',   ':History<CR>')
+--map('n', '<A-b>',   ':Buffers<CR>')
+--map('n', '<A-w>',   ':Windows<CR>')
+--map('n', '<A-f>',   ':Rg<CR>')
+--map('n', '<A-C-f>', ':GFiles?<CR>')
+--map('n', '<A-c>',   ':Commands<CR>')
+--map('n', '<A-y>',   ':Clap yanks<CR>')
+--map('n', '<A-q>',   ':Clap quickfix<CR>')
+--map('n', '<A-m>',   ':Maps<CR>')
 
 -- LSP mappings
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
@@ -131,3 +154,6 @@ map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
 map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
 map("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
 
+-- Vimux
+map("n", "<Leader>p", [[:call VimuxRunCommand("sfdx force:source:legacy:push")<CR>]])
+--map("n", "<Leader>o", [[:call VimuxRunCommand(open_org_command)<CR>]])
