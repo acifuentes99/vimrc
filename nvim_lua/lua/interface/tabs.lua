@@ -1,12 +1,6 @@
 ----------------------------------------------------------
 -- Tabs configuration
 -----------------------------------------------------------
-
---require("tabby").setup({
---    tabline = require("tabby.presets").tab_with_top_win,
---})
-
-
 local filename = require('tabby.filename')
 local util = require('tabby.util')
 local devicons = require('nvim-web-devicons')

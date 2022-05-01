@@ -58,7 +58,6 @@ autocmd('CmdlineEnter', {
 autocmd('TermOpen', {
   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
-
 autocmd('TermOpen', {
   pattern = '*',
   command = 'startinsert'
@@ -71,16 +70,32 @@ autocmd('BufLeave', {
 })
 
 -- Autosave leaving insert mode
-augroup('AUTOSAVE', { clear = true })
-autocmd('InsertLeave,TextChanged,FocusLost', {
-  group = 'AUTOSAVE',
+augroup('Autosave', { clear = true })
+autocmd({"InsertLeave", "TextChanged", "FocusLost"}, {
+  group = 'Autosave',
   pattern = '*',
   command = 'silent! write'
 })
 
--- Set .cmp as Apexcode files
-vim.cmd [[
-autocmd BufNewFile,BufRead *.cls set filetype=apexcode
-autocmd BufNewFile,BufRead *.trigger set filetype=apexcode
-autocmd BufNewFile,BufRead *.cmp set filetype=apexcode
-]]
+-- Set filetypes for rare extensions
+autocmd({"BufNewFile","BufRead"}, {
+  pattern = '*.cls,*.trigger',
+  command = 'set filetype=apexcode'
+})
+autocmd({"BufNewFile","BufRead"}, {
+  pattern = '*.cmp',
+  command = 'set filetype=html'
+})
+
+-- Highlight current line only on focused window
+augroup('ActiveWinCursorLine', { clear = true })
+autocmd({"WinEnter", "BufEnter", "InsertLeave"}, {
+  group = 'ActiveWinCursorLine',
+  pattern = '*',
+  command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
+})
+autocmd({"WinLeave", "BufLeave", "InsertEnter"}, {
+  group = 'ActiveWinCursorLine',
+  pattern = '*',
+  command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
+})

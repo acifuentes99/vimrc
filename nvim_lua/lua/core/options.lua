@@ -33,12 +33,15 @@ opt.termguicolors = true    -- Enable 24-bit RGB colors
 opt.laststatus=3            -- Set global statusline
 
 -----------------------------------------------------------
--- Tabs, indent
+-- Tabs, indent, breakindent
 -----------------------------------------------------------
-opt.expandtab = true        -- Use spaces instead of tabs
-opt.shiftwidth = 4          -- Shift 4 spaces when tab
-opt.tabstop = 4             -- 1 tab == 4 spaces
-opt.smartindent = true      -- Autoindent new lines
+opt.expandtab = true            -- Use spaces instead of tabs
+opt.shiftwidth = 4              -- Shift 4 spaces when tab
+opt.tabstop = 4                 -- 1 tab == 4 spaces
+opt.smartindent = true          -- Autoindent new lines
+opt.breakindent = true          -- indent for breaklines
+opt.breakindentopt = 'shift:2'  -- set a space of 2, next line of breakident
+opt.showbreak = '↳'             -- Character before breaklines
 
 -----------------------------------------------------------
 -- Memory, CPU

@@ -25,12 +25,24 @@ if fn.empty(fn.glob(install_path)) > 0 then
   })
 end
 
+-- Check if terminal is Unix or PowerShell
+local function isUnixWSL()
+  local term = os.getenv("TERM")
+  return term == "xterm-256color"
+end
+
+-- Check if terminal is Unix or PowerShell
+local function isVimNotesMode()
+  local term = os.getenv("VIM_NOTES_MODE_ON")
+  return term == "xterm-256color"
+end
+
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
 vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packer_init.lua source <afile> | PackerSync
-  augroup end
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost packer_init.lua source <afile> | PackerSync
+augroup end
 ]]
 
 -- Use a protected call so we don't error out on first use
@@ -61,19 +73,33 @@ return packer.startup(function(use)
   -- LSP
   use 'neovim/nvim-lspconfig'
   use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" }})
-  -- Autocomplete - COQ Nvim
-  --use { 'ms-jpq/coq_nvim' }
-  --use 'ms-jpq/coq.artifacts'
-  -- Statusline
-  use { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
-  -- Vim Tabs
-  use 'nanozuki/tabby.nvim'
-  -- Marks on line number
-  use 'chentau/marks.nvim'
-  -- Diff View (like VS Code)
-  use 'sindrets/diffview.nvim'
+
+  -- Autocompletion & snippets
+  use { 'L3MON4D3/LuaSnip', }
+
+  use { 'hrsh7th/nvim-cmp',
+  requires = {
+    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+    { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+  }}
+
+  use {
+    --use { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
+    { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
+    -- Vim Tabs
+    { 'nanozuki/tabby.nvim'},
+    -- Marks on line number
+    { 'chentau/marks.nvim' },
+    -- Diff View (like VS Code)
+    { 'sindrets/diffview.nvim'},
+  }
+
   -- git labels
-    use {
+  use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -89,26 +115,26 @@ return packer.startup(function(use)
   use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
   -- Tmux and Vim integration
   use({ "aserowy/tmux.nvim",
-    config = function()
-      require("tmux").setup({
-        copy_sync = {
-          enable = false,
-        },
-        navigation = {
-          enable_default_keybindings = true,
-        },
-        resize = {
-          -- enables default keybindings (A-hjkl) for normal mode
-          enable_default_keybindings = true,
-        }
-      })
-    end
-  })
-  use 'preservim/vimux'
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
+  config = function()
+    require("tmux").setup({
+      copy_sync = {
+        enable = false,
+      },
+      navigation = {
+        enable_default_keybindings = true,
+      },
+      resize = {
+        -- enables default keybindings (A-hjkl) for normal mode
+        enable_default_keybindings = true,
+      }
+    })
   end
+})
+use 'preservim/vimux'
+
+-- Automatically set up your configuration after cloning packer.nvim
+-- Put this at the end after all plugins
+if packer_bootstrap then
+  require('packer').sync()
+end
 end)
