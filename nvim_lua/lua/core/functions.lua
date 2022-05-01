@@ -1,17 +1,16 @@
+----------------------------------------------------------
+-- Utilitary Vim Funcions
+-- Customized functions and commands
+-----------------------------------------------------------
+
+-- Use Vim Api, to register functions, then use them on keymaps.lua, or
+-- other parts of code
 local api = vim.api
-local M = {}
 
 ----------------------------------------------------------
 -- New tab: Scratch Buffer
 -----------------------------------------------------------
-function M.tabNewWithScratchBuffer()
-  api.nvim_command('tabnew') -- equivalent to :enew
-  vim.bo.buftype='nofile' -- set the current buffer's (buffer 0) buftype to nofile
-  vim.bo.bufhidden='hide'
-  vim.bo.swapfile=false
-end
-
-vim.api.nvim_create_user_command('TabNewWithScratchBuffer', function()
+api.nvim_create_user_command('TabNewWithScratchBuffer', function()
   api.nvim_command('tabnew') -- equivalent to :enew
   vim.bo.buftype='nofile' -- set the current buffer's (buffer 0) buftype to nofile
   vim.bo.bufhidden='hide'
@@ -47,5 +46,3 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 ]]
-
-return M

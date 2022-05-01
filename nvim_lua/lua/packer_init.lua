@@ -5,14 +5,11 @@
 -- Plugin manager: packer.nvim
 -- url: https://github.com/wbthomason/packer.nvim
 
--- For information about installed plugins see the README:
--- neovim-lua/README.md
--- https://github.com/brainfucksec/neovim-lua#readme
-
-
 -- Automatically install packer
 local fn = vim.fn
+local utils = require('utils')
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local tmux_conf = require('plugins/nvim-tmux')
 
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
@@ -23,18 +20,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     'https://github.com/wbthomason/packer.nvim',
     install_path
   })
-end
-
--- Check if terminal is Unix or PowerShell
-local function isUnixWSL()
-  local term = os.getenv("TERM")
-  return term == "xterm-256color"
-end
-
--- Check if terminal is Unix or PowerShell
-local function isVimNotesMode()
-  local term = os.getenv("VIM_NOTES_MODE_ON")
-  return term == "xterm-256color"
 end
 
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
@@ -55,82 +40,83 @@ end
 return packer.startup(function(use)
   -- Add you plugins here:
   use 'wbthomason/packer.nvim' -- packer can manage itself
-  -- File explorer
-  use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', } }
-  -- Indent line
-  use 'lukas-reineke/indent-blankline.nvim'
-  -- Icons
-  use 'kyazdani42/nvim-web-devicons'
-  -- Tag viewer
-  use 'preservim/tagbar'
   -- Treesitter interface
   use 'nvim-treesitter/nvim-treesitter'
+
   -- Color schemes
-  use 'navarasu/onedark.nvim'
-  use 'tanvirtin/monokai.nvim'
-  use { 'rose-pine/neovim', as = 'rose-pine' }
-  use { 'Shatur/neovim-ayu' }
-  -- LSP
-  use 'neovim/nvim-lspconfig'
-  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" }})
-
-  -- Autocompletion & snippets
-  use { 'L3MON4D3/LuaSnip', }
-
-  use { 'hrsh7th/nvim-cmp',
-  requires = {
-    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-    { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-  }}
-
   use {
+    { 'navarasu/onedark.nvim' },
+    { 'tanvirtin/monokai.nvim' },
+    { 'rose-pine/neovim', as = 'rose-pine'  },
+    { 'Shatur/neovim-ayu' },
+  }
+
+  -- Interface
+  use {
+    -- Icons
+    { 'kyazdani42/nvim-web-devicons' },
+    -- Dashboard (start screen)
+    { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
+    -- File explorer
+    { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', } },
     --use { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
     { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
+    -- Indent line
+    { 'lukas-reineke/indent-blankline.nvim' },
     -- Vim Tabs
-    { 'nanozuki/tabby.nvim'},
+    { 'nanozuki/tabby.nvim' },
     -- Marks on line number
     { 'chentau/marks.nvim' },
-    -- Diff View (like VS Code)
-    { 'sindrets/diffview.nvim'},
+    -- Git labels
+    { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function() require('gitsigns').setup() end },
   }
 
-  -- git labels
+  -- LSP
   use {
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('gitsigns').setup()
-    end
+    { 'neovim/nvim-lspconfig' },
+    { 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" } }
   }
-  -- Vim Clap - Fuzzy Finding
-  use 'liuchengxu/vim-clap'
-  -- Vim FZF (In case of missing functions in Clap)
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
-  -- Dashboard (start screen)
-  use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
+
+  -- Autocompletion & snippets
+  use {
+    { 'L3MON4D3/LuaSnip', },
+    { 'hrsh7th/nvim-cmp',
+    requires = {
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+    }}
+  }
+
+  -- Helpers (Owns UI)
+  use {
+    -- Tag viewer
+    { 'preservim/tagbar' },
+    -- Git Diff View (like VS Code)
+    { 'sindrets/diffview.nvim' },
+    -- Easy Align
+    { 'junegunn/vim-easy-align' },
+    -- Surround, pair character
+    { 'tpope/vim-surround' },
+  }
+
+  -- Fuzzy Finding
+  use {
+    -- Vim Clap
+    { 'liuchengxu/vim-clap' },
+    -- Vim FZF (In case of missing functions in Clap)
+    { 'junegunn/fzf' },
+    { 'junegunn/fzf.vim' },
+  }
+
   -- Tmux and Vim integration
-  use({ "aserowy/tmux.nvim",
-  config = function()
-    require("tmux").setup({
-      copy_sync = {
-        enable = false,
-      },
-      navigation = {
-        enable_default_keybindings = true,
-      },
-      resize = {
-        -- enables default keybindings (A-hjkl) for normal mode
-        enable_default_keybindings = true,
-      }
-    })
-  end
-})
-use 'preservim/vimux'
+  use {
+    { "aserowy/tmux.nvim", cond = utils.isNotPowershell, config = tmux_conf.conf },
+    { 'preservim/vimux', cond = utils.isNotPowershell}
+  }
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
