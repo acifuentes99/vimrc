@@ -18,9 +18,9 @@ vim.g.mapleader = ','
 -----------------------------------------------------------
 
 -- Disable arrow keys
-map('', '<up>', '<nop>')
-map('', '<down>', '<nop>')
-map('', '<left>', '<nop>')
+map('', '<up>',    '<nop>')
+map('', '<down>',  '<nop>')
+map('', '<left>',  '<nop>')
 map('', '<right>', '<nop>')
 
 -- Map Esc to kk
@@ -50,23 +50,23 @@ map('i', '<leader>s', '<C-c>:w<CR>')
 map('n', '<leader>q', ':qa!<CR>')
 
 -- Tab and Buffer management
-map('n', '<A-t>', ':TabNewWithScratchBuffer<CR>')
-map('n', '<A-x>', ':close<CR>')
-map('n', '<A-C-x>', ':tabclose<CR>')
-map('n', '<C-Y>', ':bprevious<CR>')
-map('n', '<C-O>', ':bnext<CR>')
-map('n', '<C-PageUp>', 'gT')
+map('n', '<A-t>',        ':TabNewWithScratchBuffer<CR>')
+map('n', '<A-x>',        ':close<CR>')
+map('n', '<A-C-x>',      ':tabclose<CR>')
+map('n', '<C-Y>',        ':bprevious<CR>')
+map('n', '<C-O>',        ':bnext<CR>')
+map('n', '<C-PageUp>',   'gT')
 map('n', '<C-PageDown>', 'gt')
-map('n', '<A-1>', '1gt')
-map('n', '<A-2>', '2gt')
-map('n', '<A-3>', '3gt')
-map('n', '<A-4>', '4gt')
-map('n', '<A-5>', '5gt')
-map('n', '<A-6>', '6gt')
-map('n', '<A-7>', '7gt')
-map('n', '<A-8>', '8gt')
-map('n', '<leader>z', '<C-W>_|<C-W>|')  -- zoom current buffer
-map('n', '<leader>=', '<C-W>=')         -- reset zooms
+map('n', '<A-1>',        '1gt')
+map('n', '<A-2>',        '2gt')
+map('n', '<A-3>',        '3gt')
+map('n', '<A-4>',        '4gt')
+map('n', '<A-5>',        '5gt')
+map('n', '<A-6>',        '6gt')
+map('n', '<A-7>',        '7gt')
+map('n', '<A-8>',        '8gt')
+map('n', '<leader>z',    '<C-W>_|<C-W>|')  -- zoom current buffer
+map('n', '<leader>=',    '<C-W>=')         -- reset zooms
 
 -- Quickfix
 map('n', '<A-C-j>', ':cn<CR>')
@@ -97,22 +97,22 @@ map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
 -- NvimTree
 map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
 map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
-map('n', '<A-e>', ':NvimTreeFindFile<CR>')      -- search file
+map('n', '<A-e>',     ':NvimTreeFindFile<CR>')      -- search file
 
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
 ---- Vim clap - Fuzzy Search
-map('n', '<A-p>', ':Clap files<CR>')
-map('n', '<A-h>', ':Clap history<CR>')
-map('n', '<A-b>', ':Clap buffers<CR>')
-map('n', '<A-w>', ':Clap windows<CR>')
-map('n', '<A-f>', ':Clap grep<CR>')
-map('n', '<A-C-f>', ':GFiles?<CR>')
-map('n', '<A-c>', ':Clap command<CR>')
-map('n', '<A-y>', ':Clap yanks<CR>')
-map('n', '<A-q>', ':Clap quickfix<CR>')
-map('n', '<A-m>', ':Clap maps<CR>')
+map('n',   '<A-p>',   ':Clap files<CR>')
+map('n',   '<A-h>',   ':Clap history<CR>')
+map('n',   '<A-b>',   ':Clap buffers<CR>')
+map('n',   '<A-w>',   ':Clap windows<CR>')
+map('n',   '<A-f>',   ':Clap grep<CR>')
+map('n',   '<A-C-f>', ':GFiles?<CR>')
+map('n',   '<A-c>',   ':Clap command<CR>')
+map('n',   '<A-y>',   ':Clap yanks<CR>')
+map('n',   '<A-q>',   ':Clap quickfix<CR>')
+map('n',   '<A-m>',   ':Clap maps<CR>')
 -- Vim clap - Fuzzy Search
 --map('n', '<A-p>',   ':Files<CR>')
 --map('n', '<A-h>',   ':History<CR>')
@@ -129,14 +129,14 @@ map('n', '<A-m>', ':Clap maps<CR>')
 -- ** On file "nvim-lspconfig.lua" **
 
 -- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
-map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
-map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-map("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-map("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
-map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
-map("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
+map("n",   "<leader>dc",  [[<cmd>lua require"dap".continue()<CR>]])
+map("n",   "<leader>dr",  [[<cmd>lua require"dap".repl.toggle()<CR>]])
+map("n",   "<leader>dK",  [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+map("n",   "<leader>dt",  [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+map("n",   "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+map("n",   "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+map("n",   "<leader>dl",  [[<cmd>lua require"dap".run_last()<CR>]])
 
 -- Vimux
-map("n", "<Leader>p", [[:call VimuxRunCommand("sfdx force:source:legacy:push")<CR>]])
---map("n", "<Leader>o", [[:call VimuxRunCommand(open_org_command)<CR>]])
+map("n",   "<Leader>p",   [[:call VimuxRunCommand("sfdx force:source:legacy:push")<CR>]])
+--map("n", "<Leader>o",   [[:call VimuxRunCommand(open_org_command)<CR>]])
