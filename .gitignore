@@ -1,1 +1,3 @@
-nvim_lua/plugin/*
+plugin
+plugin/
+plugin/*
