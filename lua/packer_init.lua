@@ -9,7 +9,6 @@
 local fn = vim.fn
 local utils = require('utils')
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local tmux_conf = require('plugins/nvim-tmux')
 
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
@@ -36,91 +35,26 @@ if not status_ok then
   return
 end
 
+local plugs = require('plugin_list')
 -- Install plugins
 return packer.startup(function(use)
-  -- Add you plugins here:
-  use 'wbthomason/packer.nvim' -- packer can manage itself
-  -- Treesitter interface
-  use 'nvim-treesitter/nvim-treesitter'
+  use { 'wbthomason/packer.nvim' } -- packer can manage itself
 
-  -- Color schemes
-  use {
-    { 'navarasu/onedark.nvim' },
-    { 'tanvirtin/monokai.nvim' },
-    { 'rose-pine/neovim', as = 'rose-pine'  },
-    { 'Shatur/neovim-ayu' },
-  }
+  for key, definitions in pairs(plugs) do
+    for i = #definitions, 1, -1 do
+      value = definitions[i]
+      --if (key == 'vimnotes') then
+      --  value.cond = utils.isVimNotesEnabled
+      --elseif (key == 'ide') then
+      --  value.cond = utils.isNotVimNotesEnabled
+      --end
+      use(value)
+    end
+  end
 
-  -- Interface
-  use {
-    -- Icons
-    { 'kyazdani42/nvim-web-devicons' },
-    -- Dashboard (start screen)
-    { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
-    -- File explorer
-    { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', } },
-    --use { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, }
-    { 'famiu/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
-    -- Indent line
-    { 'lukas-reineke/indent-blankline.nvim' },
-    -- Vim Tabs
-    { 'nanozuki/tabby.nvim' },
-    -- Marks on line number
-    { 'chentau/marks.nvim' },
-    -- Git labels
-    { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function() require('gitsigns').setup() end },
-  }
-
-  -- LSP
-  use {
-    { 'neovim/nvim-lspconfig' },
-    { 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" } }
-  }
-
-  -- Autocompletion & snippets
-  use {
-    { 'L3MON4D3/LuaSnip', },
-    { 'hrsh7th/nvim-cmp',
-    requires = {
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-    }}
-  }
-
-  -- Helpers (Owns UI)
-  use {
-    -- Tag viewer
-    { 'preservim/tagbar' },
-    -- Git Diff View (like VS Code)
-    { 'sindrets/diffview.nvim' },
-    -- Easy Align
-    { 'junegunn/vim-easy-align' },
-    -- Surround, pair character
-    { 'tpope/vim-surround' },
-  }
-
-  -- Fuzzy Finding
-  use {
-    -- Vim Clap
-    { 'liuchengxu/vim-clap' },
-    -- Vim FZF (In case of missing functions in Clap)
-    { 'junegunn/fzf' },
-    { 'junegunn/fzf.vim' },
-  }
-
-  -- Tmux and Vim integration
-  use {
-    { "aserowy/tmux.nvim", cond = utils.isNotPowershell, config = tmux_conf.conf },
-    { 'preservim/vimux', cond = utils.isNotPowershell}
-  }
-
--- Automatically set up your configuration after cloning packer.nvim
--- Put this at the end after all plugins
-if packer_bootstrap then
-  require('packer').sync()
-end
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)

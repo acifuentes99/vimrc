@@ -10,9 +10,13 @@ function M.isNotPowershell()
 end
 
 -- Check if terminal is Unix or PowerShell
-function M.isVimNotesMode()
-  local term = os.getenv("VIM_NOTES_MODE_ON")
-  return term == "xterm-256color"
+function M.isVimNotesEnabled()
+  return os.getenv("VIM_NOTES_ENABLED") == "1"
+end
+
+-- Check if terminal is Unix or PowerShell
+function M.isNotVimNotesEnabled()
+  return os.getenv("VIM_NOTES_ENABLED") ~= "1"
 end
 
 return M

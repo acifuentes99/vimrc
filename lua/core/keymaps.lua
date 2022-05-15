@@ -140,3 +140,11 @@ map("n",   "<leader>dl",  [[<cmd>lua require"dap".run_last()<CR>]])
 -- Vimux
 map("n",   "<Leader>p",   [[:call VimuxRunCommand("sfdx force:source:legacy:push")<CR>]])
 --map("n", "<Leader>o",   [[:call VimuxRunCommand(open_org_command)<CR>]])
+
+-- Vim LSP
+-- TODO : Temporal Keybindings
+-- Will stay, as TODO of nvim-lsp is not resolved
+map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
