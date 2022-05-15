@@ -13,17 +13,19 @@ local plugs = {
     -- Icons
     { 'kyazdani42/nvim-web-devicons' },
     -- Dashboard (start screen)
-    { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
+    { 'goolord/alpha-nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' }, },
     -- File explorer
     { 'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons', },
-      config = 'require("plugins/nvim-tree")' },
+      config   = function() require("plugins/nvim-tree") end },
     -- Statusbar
-    { 'feline-nvim/feline.nvim', requires = { 'kyazdani42/nvim-web-devicons' }, },
+    { 'feline-nvim/feline.nvim',
+    requires   = { 'kyazdani42/nvim-web-devicons' }, },
     -- Indent line view on editor
     { 'lukas-reineke/indent-blankline.nvim',
-      cond = utils.isNotVimNotesEnabled,
-      config = 'require("plugins/indent-blankline")'},
+      cond     = utils.isNotVimNotesEnabled,
+      config   = function() require("plugins/indent-blankline") end },
     -- Vim Tabs
     { 'nanozuki/tabby.nvim' },
     -- Marks on line number
@@ -42,7 +44,7 @@ local plugs = {
     { 'junegunn/fzf.vim' },
     -- Tmux
     { "aserowy/tmux.nvim", cond = utils.isNotPowershell },
-    { 'preservim/vimux', cond = utils.isNotPowershell},
+    { 'preservim/vimux',   cond = utils.isNotPowershell },
     -- Tag viewer
     { 'preservim/tagbar', },
     -- Easy Align
@@ -52,6 +54,7 @@ local plugs = {
     -- Autocompletion & snippets
     { 'L3MON4D3/LuaSnip', },
     { 'hrsh7th/nvim-cmp',
+    config = function() require('plugins/nvim-cmp') end,
     requires = {
       { 'hrsh7th/cmp-path',         after = 'nvim-cmp' },
       { 'hrsh7th/cmp-buffer',       after = 'nvim-cmp' },
@@ -66,28 +69,28 @@ local plugs = {
     -- Git labels
     { 'lewis6991/gitsigns.nvim',
       requires = { 'nvim-lua/plenary.nvim' },
-      cond = utils.isNotVimNotesEnabled,
-      config = function() require('gitsigns').setup() end },
+      cond     = utils.isNotVimNotesEnabled,
+      config   = function() require('gitsigns').setup() end },
     -- Git Diff View (like VS Code)
     { 'sindrets/diffview.nvim',
-      cond = utils.isNotVimNotesEnabled },
+      cond     = utils.isNotVimNotesEnabled },
   },
 
   ide = {
   -- LSP
     { 'neovim/nvim-lspconfig' },
     { 'williamboman/nvim-lsp-installer',
-      config = function() require('plugins/nvim-lsp') end,
-      after  = { 'nvim-lspconfig' } },
+      config   = function() require('plugins/nvim-lsp') end,
+      after    = { 'nvim-lspconfig' } },
     { 'scalameta/nvim-metals',
       requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
-      config = 'require("plugins/nvim-metals")' },
+      config   = function() require("plugins/nvim-metals") end },
   },
 
   vimnotes = {
     { 'vimwiki/vimwiki',
       config = function() require('plugins/vimwiki') end,
-      cond = utils.isVimNotesEnabled },
+      cond   = utils.isVimNotesEnabled },
   },
 }
 return plugs
