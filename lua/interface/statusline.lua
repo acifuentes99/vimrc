@@ -219,6 +219,38 @@ local comps = {
   }
 }
 
+---- Get active/inactive components
+---- See: https://github.com/famiu/feline.nvim/blob/master/USAGE.md#components
+--local components = {
+--  active = {},
+--  inactive = {},
+--}
+--
+--table.insert(components.active, {})
+--table.insert(components.active, {})
+--table.insert(components.inactive, {})
+--table.insert(components.inactive, {})
+--
+---- Right section
+----table.insert(components.active[1], comps.vi_mode.left)
+--table.insert(components.active[1], comps.file.info)
+--table.insert(components.active[1], comps.git.branch)
+--table.insert(components.active[1], comps.git.add)
+--table.insert(components.active[1], comps.git.change)
+--table.insert(components.active[1], comps.git.remove)
+--table.insert(components.inactive[1], comps.file.info)
+--
+---- Left Section
+--table.insert(components.active[2], comps.diagnos.err)
+--table.insert(components.active[2], comps.diagnos.warn)
+--table.insert(components.active[2], comps.diagnos.hint)
+--table.insert(components.active[2], comps.diagnos.info)
+--table.insert(components.active[2], comps.lsp.name)
+--table.insert(components.active[2], comps.file.type)
+--table.insert(components.active[2], comps.file.os)
+--table.insert(components.active[2], comps.file.position)
+--table.insert(components.active[2], comps.file.line_percentage)
+
 -- Get active/inactive components
 -- See: https://github.com/famiu/feline.nvim/blob/master/USAGE.md#components
 local components = {
@@ -232,13 +264,17 @@ table.insert(components.inactive, {})
 table.insert(components.inactive, {})
 
 -- Right section
-table.insert(components.active[1], comps.vi_mode.left)
+--table.insert(components.active[1], comps.vi_mode.left)
 table.insert(components.active[1], comps.file.info)
 table.insert(components.active[1], comps.git.branch)
 table.insert(components.active[1], comps.git.add)
 table.insert(components.active[1], comps.git.change)
 table.insert(components.active[1], comps.git.remove)
 table.insert(components.inactive[1], comps.file.info)
+table.insert(components.inactive[1], comps.git.branch)
+table.insert(components.inactive[1], comps.git.add)
+table.insert(components.inactive[1], comps.git.change)
+table.insert(components.inactive[1], comps.git.remove)
 
 -- Left Section
 table.insert(components.active[2], comps.diagnos.err)
@@ -250,6 +286,16 @@ table.insert(components.active[2], comps.file.type)
 table.insert(components.active[2], comps.file.os)
 table.insert(components.active[2], comps.file.position)
 table.insert(components.active[2], comps.file.line_percentage)
+table.insert(components.inactive[2], comps.diagnos.err)
+table.insert(components.inactive[2], comps.diagnos.warn)
+table.insert(components.inactive[2], comps.diagnos.hint)
+table.insert(components.inactive[2], comps.diagnos.info)
+table.insert(components.inactive[2], comps.lsp.name)
+table.insert(components.inactive[2], comps.file.type)
+table.insert(components.inactive[2], comps.file.os)
+table.insert(components.inactive[2], comps.file.position)
+table.insert(components.inactive[2], comps.file.line_percentage)
+
 
 -- Call feline
 feline.setup {
@@ -258,7 +304,7 @@ feline.setup {
     fg = colors.fg,
   },
   components = components,
-  vi_mode_colors = vi_mode_colors,
+  --vi_mode_colors = vi_mode_colors,
   force_inactive = {
     filetypes = {
       '^NvimTree$',
@@ -272,3 +318,6 @@ feline.setup {
     bufnames = {},
   },
 }
+
+
+--require('feline').winbar.setup()

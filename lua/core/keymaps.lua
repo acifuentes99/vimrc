@@ -33,6 +33,12 @@ map('n', '<space>', ':nohl<CR>')
 map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
 
+-- Move around splits, and zoom
+map('n', '<A-h>', '<C-w>h<C-W>_|<C-W>|')
+map('n', '<A-j>', '<C-w>j<C-W>_|<C-W>|')
+map('n', '<A-k>', '<C-w>k<C-W>_|<C-W>|')
+map('n', '<A-l>', '<C-w>l<C-W>_|<C-W>|')
+
 -- Move around splits using Ctrl + {h,j,k,l}
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -103,27 +109,27 @@ map('n', '<A-e>',     ':NvimTreeFindFile<CR>')      -- search file
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
 ---- Vim clap - Fuzzy Search
-map('n',   '<A-p>',   ':Clap files<CR>')
-map('n',   '<A-h>',   ':Clap history<CR>')
-map('n',   '<A-b>',   ':Clap buffers<CR>')
-map('n',   '<A-w>',   ':Clap windows<CR>')
-map('n',   '<A-f>',   ':Clap grep<CR>')
-map('n',   '<A-C-f>', ':GFiles?<CR>')
-map('n',   '<A-c>',   ':Clap command<CR>')
-map('n',   '<A-y>',   ':Clap yanks<CR>')
-map('n',   '<A-q>',   ':Clap quickfix<CR>')
-map('n',   '<A-m>',   ':Clap maps<CR>')
+--map('n',   '<A-p>',   ':Clap files<CR>')
+--map('n',   '<leader>h',   ':Clap history<CR>')
+--map('n',   '<A-b>',   ':Clap buffers<CR>')
+--map('n',   '<A-w>',   ':Clap windows<CR>')
+--map('n',   '<A-f>',   ':Clap grep<CR>')
+--map('n',   '<A-C-f>', ':GFiles?<CR>')
+--map('n',   '<A-c>',   ':Clap command<CR>')
+--map('n',   '<A-y>',   ':Clap yanks<CR>')
+--map('n',   '<A-q>',   ':Clap quickfix<CR>')
+--map('n',   '<A-m>',   ':Clap maps<CR>')
 -- Vim clap - Fuzzy Search
---map('n', '<A-p>',   ':Files<CR>')
+map('n', '<A-p>',   ':Files<CR>')
 --map('n', '<A-h>',   ':History<CR>')
---map('n', '<A-b>',   ':Buffers<CR>')
---map('n', '<A-w>',   ':Windows<CR>')
---map('n', '<A-f>',   ':Rg<CR>')
---map('n', '<A-C-f>', ':GFiles?<CR>')
---map('n', '<A-c>',   ':Commands<CR>')
---map('n', '<A-y>',   ':Clap yanks<CR>')
---map('n', '<A-q>',   ':Clap quickfix<CR>')
---map('n', '<A-m>',   ':Maps<CR>')
+map('n', '<A-b>',   ':Buffers<CR>')
+map('n', '<A-w>',   ':Windows<CR>')
+map('n', '<A-f>',   ':Rg<CR>')
+map('n', '<A-C-f>', ':GFiles?<CR>')
+map('n', '<A-c>',   ':Commands<CR>')
+map('n', '<A-y>',   ':Clap yanks<CR>')
+map('n', '<A-q>',   ':Clap quickfix<CR>')
+map('n', '<A-m>',   ':Maps<CR>')
 
 -- LSP mappings
 -- ** On file "nvim-lspconfig.lua" **

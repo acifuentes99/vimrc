@@ -22,12 +22,16 @@ local plugs = {
     -- Statusbar
     { 'feline-nvim/feline.nvim',
     requires   = { 'kyazdani42/nvim-web-devicons' }, },
+    -- Statusbar
+    { 'nvim-lualine/lualine.nvim',
+    requires   = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require("interface/lualine") end },
     -- Indent line view on editor
     { 'lukas-reineke/indent-blankline.nvim',
       cond     = utils.isNotVimNotesEnabled,
       config   = function() require("plugins/indent-blankline") end },
     -- Vim Tabs
-    { 'nanozuki/tabby.nvim' },
+    --{ 'nanozuki/tabby.nvim' },
     -- Marks on line number
     { 'chentoast/marks.nvim' },
   },

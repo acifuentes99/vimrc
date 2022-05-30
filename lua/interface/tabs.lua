@@ -100,6 +100,8 @@ local tabline = {
   },
 }
 
+
 require('tabby').setup({
-  tabline = tabline,
+  --tabline = tabline,
+  tabline = require("tabby.presets").active_wins_at_tail,
 })
