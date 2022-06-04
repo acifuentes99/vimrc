@@ -83,10 +83,10 @@ local plugs = {
 
   ide = {
   -- LSP
-    { 'williamboman/nvim-lsp-installer' },
-    { 'neovim/nvim-lspconfig',
+    { 'neovim/nvim-lspconfig' },
+    { 'williamboman/nvim-lsp-installer',
       config   = function() require('plugins/nvim-lsp') end,
-      after    = { 'nvim-lsp-installer' } },
+      after    = { 'nvim-lspconfig' } },
     { 'scalameta/nvim-metals',
       requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
       config   = function() require("plugins/nvim-metals") end },
