@@ -19,13 +19,14 @@ local plugs = {
     { 'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons', },
       config   = function() require("plugins/nvim-tree") end },
-    -- Statusbar
-    { 'feline-nvim/feline.nvim',
-    requires   = { 'kyazdani42/nvim-web-devicons' }, },
-    -- Statusbar
-    { 'nvim-lualine/lualine.nvim',
-    requires   = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require("interface/lualine") end },
+    -- Status bar express line
+    { 'tjdevries/express_line.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', },
+      config   = function() require("interface/expressline") end },
+    ---- Statusbar
+    --{ 'nvim-lualine/lualine.nvim',
+    --requires   = { 'kyazdani42/nvim-web-devicons' },
+    --config = function() require("interface/lualine") end },
     -- Indent line view on editor
     { 'lukas-reineke/indent-blankline.nvim',
       cond     = utils.isNotVimNotesEnabled,
@@ -82,10 +83,10 @@ local plugs = {
 
   ide = {
   -- LSP
-    { 'neovim/nvim-lspconfig' },
-    { 'williamboman/nvim-lsp-installer',
+    { 'williamboman/nvim-lsp-installer' },
+    { 'neovim/nvim-lspconfig',
       config   = function() require('plugins/nvim-lsp') end,
-      after    = { 'nvim-lspconfig' } },
+      after    = { 'nvim-lsp-installer' } },
     { 'scalameta/nvim-metals',
       requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
       config   = function() require("plugins/nvim-metals") end },

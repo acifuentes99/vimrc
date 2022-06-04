@@ -2,7 +2,7 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
+    component_separators = { left = ' ', right = '|'},
     section_separators = { left = '', right = ''},
     disabled_filetypes = { 'packer', 'NVimTree' },
     always_divide_middle = true,
@@ -11,30 +11,33 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'filename'},
-    lualine_b = {},
+    lualine_b = {'filetype'},
     lualine_c = {},
-    lualine_x = {},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_x = {'progress','location'},
+    lualine_y = {},
+    lualine_z = {}
   },
   inactive_sections = {
     lualine_a = {'filename'},
-    lualine_b = {},
+    lualine_b = {'filetype'},
     lualine_c = {},
-    lualine_x = {'location'},
+    lualine_x = {'progress','location'},
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {'mode','tabs'},
-    lualine_b = {},
+    lualine_a = {'mode'},
+    lualine_b = {'tabs'},
     lualine_c = {},
-    lualine_x = {'branch','encoding','fileformat'},
-    lualine_y = {'filetype'},
-    lualine_z = {'filename'}
+    lualine_x = {'diff','diagnostics'},
+    lualine_y = {'encoding','fileformat'},
+    lualine_z = {'branch'}
   },
   extensions = {'nvim-tree', 'quickfix'}
 }
+
+--constant update on tabbar
+--tablar only updates, on buffer or window change
 if _G.Tabline_timer == nil then
   _G.Tabline_timer = vim.loop.new_timer()
 else

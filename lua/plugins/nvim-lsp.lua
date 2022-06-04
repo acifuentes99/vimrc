@@ -158,7 +158,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -----------------------------------------------------------
 -- Language Server Configuration
 -----------------------------------------------------------
-local servers = { 'html', 'tsserver', 'jsonls', 'apex-lsp' }
+local servers = { 'html', 'tsserver', 'jsonls', 'apex_ls' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do
