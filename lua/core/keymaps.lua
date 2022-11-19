@@ -56,9 +56,10 @@ map('i', '<leader>s', '<C-c>:w<CR>')
 map('n', '<leader>q', ':qa!<CR>')
 
 -- Tab and Buffer management
-map('n', '<A-t>',        ':TabNewWithScratchBuffer<CR>')
-map('n', '<A-x>',        ':close<CR>')
-map('n', '<A-C-x>',      ':tabclose<CR>')
+--map('n', '<A-t>',        ':TabNewWithScratchBuffer<CR>')
+map('n', '<C-t>', ':TabNewWithScratchBuffer<CR>', { noremap = true })  -- open
+map('n', '<C-q>',        ':close<CR>')
+map('n', '<C-S-q>',      ':tabclose<CR>')
 map('n', '<C-Y>',        ':bprevious<CR>')
 map('n', '<C-O>',        ':bnext<CR>')
 map('n', '<C-PageUp>',   'gT')
@@ -75,8 +76,10 @@ map('n', '<leader>z',    '<C-W>_|<C-W>|')  -- zoom current buffer
 map('n', '<leader>=',    '<C-W>=')         -- reset zooms
 
 -- Quickfix
-map('n', '<A-C-j>', ':cn<CR>')
-map('n', '<A-C-k>', ':cp<CR>')
+--map('n', '<A-C-j>', ':cn<CR>')
+--map('n', '<A-C-k>', ':cp<CR>')
+map('n', '<A-j>', ':cn<CR>')
+map('n', '<A-k>', ':cp<CR>')
 
 -- Quick settings
 map('n', '<leader>n', ':set invnumber<CR>') -- toggle line numbers
@@ -97,12 +100,12 @@ map('v', '*', ":<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>")
 map('v', '#', ":<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>")
 
 -- Terminal mappings
-map('n', '<C-t>', ':Term<CR>', { noremap = true })  -- open
-map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
+--map('n', '<C-t>', ':Term<CR>', { noremap = true })  -- open
+--map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
 
 -- NvimTree
 --map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
-map('n', '<leader>t', ':lua require("core/callables").nvimTreeOpen()<CR>')            -- open/close
+map('n', '<A-t>', ':lua require("core/callables").nvimTreeOpen()<CR>')            -- open/close
 map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
 map('n', '<A-e>',     ':NvimTreeFindFile<CR>')      -- search file
 --map('n', '<A-e>', ':lua require("core/callables").nvimTreeFindFile()<CR>')            -- open/close
@@ -110,28 +113,28 @@ map('n', '<A-e>',     ':NvimTreeFindFile<CR>')      -- search file
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
 
----- Vim clap - Fuzzy Search
---map('n',   '<A-p>',   ':Clap files<CR>')
---map('n',   '<leader>h',   ':Clap history<CR>')
---map('n',   '<A-b>',   ':Clap buffers<CR>')
---map('n',   '<A-w>',   ':Clap windows<CR>')
---map('n',   '<A-f>',   ':Clap grep<CR>')
---map('n',   '<A-C-f>', ':GFiles?<CR>')
---map('n',   '<A-c>',   ':Clap command<CR>')
---map('n',   '<A-y>',   ':Clap yanks<CR>')
---map('n',   '<A-q>',   ':Clap quickfix<CR>')
---map('n',   '<A-m>',   ':Clap maps<CR>')
--- Vim clap - Fuzzy Search
-map('n', '<A-p>',   ':Files<CR>')
+-- Fzf Vim - Fuzzy Search
+--map('n', '<A-p>',   ':Files<CR>')
 --map('n', '<A-h>',   ':History<CR>')
-map('n', '<A-b>',   ':Buffers<CR>')
-map('n', '<A-w>',   ':Windows<CR>')
-map('n', '<A-f>',   ':Rg<CR>')
-map('n', '<A-C-f>', ':GFiles?<CR>')
-map('n', '<A-c>',   ':Commands<CR>')
-map('n', '<A-y>',   ':Clap yanks<CR>')
-map('n', '<A-q>',   ':Clap quickfix<CR>')
-map('n', '<A-m>',   ':Maps<CR>')
+--map('n', '<A-b>',   ':Buffers<CR>')
+--map('n', '<A-w>',   ':Windows<CR>')
+--map('n', '<A-f>',   ':Rg<CR>')
+--map('n', '<A-C-f>', ':GFiles?<CR>')
+--map('n', '<A-c>',   ':Commands<CR>')
+--map('n', '<A-y>',   ':Clap yanks<CR>')
+--map('n', '<A-q>',   ':Clap quickfix<CR>')
+--map('n', '<A-m>',   ':Maps<CR>')
+-- Fzf Lua - Fuzzy Search
+map('n', '<A-p>',   ':FzfLua files<CR>')
+map('n', '<A-h>',   ':FzfLua oldfiles<CR>')
+map('n', '<A-b>',   ':FzfLua buffers<CR>')
+map('n', '<A-w>',   ':FzfLua tabs<CR>')
+map('n', '<A-f>',   ':FzfLua grep_project<CR>')
+map('n', '<A-g>',   ':FzfLua git_status<CR>')
+map('n', '<A-c>',   ':FzfLua commnads<CR>')
+map('n', '<A-y>',   ':FzfLua yanks<CR>')
+map('n', '<A-q>',   ':FzfLua quickfix<CR>')
+map('n', '<A-m>',   ':FzfLua marks<CR>')
 
 -- LSP mappings
 -- ** On file "nvim-lspconfig.lua" **

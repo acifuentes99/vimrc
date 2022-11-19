@@ -7,7 +7,7 @@ require('lualine').setup {
     disabled_filetypes = { 'packer', 'NVimTree' },
     always_divide_middle = true,
     globalstatus = false,
-    theme = 'base16'
+    --theme = 'base16'
   },
   sections = {
     lualine_a = {'filename'},
