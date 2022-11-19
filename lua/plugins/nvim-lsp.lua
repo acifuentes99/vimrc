@@ -87,7 +87,7 @@ vim.cmd([[
 -- Add additional capabilities supported by nvim-cmp
 -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -158,7 +158,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -----------------------------------------------------------
 -- Language Server Configuration
 -----------------------------------------------------------
-local servers = { 'html', 'tsserver', 'jsonls', 'apex_ls' }
+local servers = { 'html', 'tsserver', 'jsonls', 'apex_ls', 'csharp_ls' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do

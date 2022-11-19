@@ -101,9 +101,11 @@ map('n', '<C-t>', ':Term<CR>', { noremap = true })  -- open
 map('t', '<Esc>', '<C-\\><C-n>')                    -- exit
 
 -- NvimTree
-map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
+--map('n', '<leader>t', ':NvimTreeToggle<CR>')            -- open/close
+map('n', '<leader>t', ':lua require("core/callables").nvimTreeOpen()<CR>')            -- open/close
 map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
 map('n', '<A-e>',     ':NvimTreeFindFile<CR>')      -- search file
+--map('n', '<A-e>', ':lua require("core/callables").nvimTreeFindFile()<CR>')            -- open/close
 
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
@@ -154,3 +156,15 @@ map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+
+-- SpellChecker
+map('i', '<F8>', '1z=')
+map('i', '<F9>', ']s')
+map('i', '<F10>', '[s')
+map('n', '<F8>', '1z=')
+map('n', '<F9>', ']s')
+map('n', '<F10>', '[s')
+map('n', '<F20>', '1z=')
+map('n', '<F21>', ']s')
+map('n', '<F22>', '[s')
+map('n', '<F5>', ':setlocal spell! spelllang=en,es<CR>')

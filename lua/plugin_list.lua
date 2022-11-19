@@ -1,63 +1,51 @@
 local utils = require('utils')
 local plugs = {
 
-  colors = {
-    -- Color schemes
+  colors = { -- Color schemes
     { 'navarasu/onedark.nvim' },
     { 'tanvirtin/monokai.nvim' },
     { 'rose-pine/neovim', as = 'rose-pine'  },
     { 'Shatur/neovim-ayu' },
+    { 'gruvbox-community/gruvbox' }
   },
 
   interface = {
-    -- Icons
-    { 'kyazdani42/nvim-web-devicons' },
-    -- Dashboard (start screen)
-    { 'goolord/alpha-nvim',
+    { 'kyazdani42/nvim-web-devicons' }, -- Icons
+    { 'goolord/alpha-nvim', -- Dashboard (start screen)
       requires = { 'kyazdani42/nvim-web-devicons' }, },
-    -- File explorer
-    { 'kyazdani42/nvim-tree.lua',
+    --{ 'kyazdani42/nvim-tree.lua', -- File explorer
+    --  requires = { 'kyazdani42/nvim-web-devicons', },
+    --  config   = function() require("plugins/nvim-tree") end },
+    { 'Almo7aya/nvim-tree.lua', -- File explorer - Fork for enable floating window
       requires = { 'kyazdani42/nvim-web-devicons', },
       config   = function() require("plugins/nvim-tree") end },
-    -- Status bar express line
-    { 'tjdevries/express_line.nvim',
+    { 'tjdevries/express_line.nvim', -- Status bar express line
       requires = { 'kyazdani42/nvim-web-devicons', },
       config   = function() require("interface/expressline") end },
-    ---- Statusbar
-    --{ 'nvim-lualine/lualine.nvim',
+    --{ 'nvim-lualine/lualine.nvim', ---- Statusbar
     --requires   = { 'kyazdani42/nvim-web-devicons' },
     --config = function() require("interface/lualine") end },
-    -- Indent line view on editor
-    { 'lukas-reineke/indent-blankline.nvim',
+    { 'lukas-reineke/indent-blankline.nvim', -- Indent line view on editor
       cond     = utils.isNotVimNotesEnabled,
       config   = function() require("plugins/indent-blankline") end },
-    -- Vim Tabs
-    --{ 'nanozuki/tabby.nvim' },
-    -- Marks on line number
-    { 'chentoast/marks.nvim' },
+    --{ 'nanozuki/tabby.nvim' }, -- Vim Tabs
+    { 'chentoast/marks.nvim' }, -- Marks on line number
   },
 
   helpers = {
     { "nvim-lua/plenary.nvim", opt = false },
-    -- Debugger
-    { "mfussenegger/nvim-dap" },
-    -- Tree Sitter
-    { 'nvim-treesitter/nvim-treesitter' },
-    -- Fuzzy find
-    { 'liuchengxu/vim-clap' },
+    { "mfussenegger/nvim-dap" },-- Debugger
+    { 'nvim-treesitter/nvim-treesitter' }, -- Tree Sitter
+    { 'liuchengxu/vim-clap' }, -- Fuzzy find
     { 'junegunn/fzf' },
     { 'junegunn/fzf.vim' },
-    -- Tmux
-    { "aserowy/tmux.nvim", cond = utils.isNotPowershell },
+    { 'ibhagwan/fzf-lua' },
+    { "aserowy/tmux.nvim", cond = utils.isNotPowershell }, -- Tmux
     { 'preservim/vimux',   cond = utils.isNotPowershell },
-    -- Tag viewer
-    { 'preservim/tagbar', },
-    -- Easy Align
-    { 'junegunn/vim-easy-align' },
-    -- Surround, pair character
-    { 'tpope/vim-surround' },
-    -- Autocompletion & snippets
-    { 'L3MON4D3/LuaSnip', },
+    { 'preservim/tagbar', }, -- Tag viewer
+    { 'junegunn/vim-easy-align' }, -- Easy Align
+    { 'tpope/vim-surround' }, -- Surround, pair character
+    { 'L3MON4D3/LuaSnip', }, -- Autocompletion & snippets
     { 'hrsh7th/nvim-cmp',
     config = function() require('plugins/nvim-cmp') end,
     requires = {
@@ -71,19 +59,17 @@ local plugs = {
   },
 
   git = {
-    -- Git labels
-    { 'lewis6991/gitsigns.nvim',
+    { 'lewis6991/gitsigns.nvim',-- Git labels
       requires = { 'nvim-lua/plenary.nvim' },
       cond     = utils.isNotVimNotesEnabled,
       config   = function() require('gitsigns').setup() end },
-    -- Git Diff View (like VS Code)
-    { 'sindrets/diffview.nvim',
+    { 'sindrets/diffview.nvim',-- Git Diff View (like VS Code)
       cond     = utils.isNotVimNotesEnabled },
   },
 
   ide = {
-  -- LSP
-    { 'neovim/nvim-lspconfig' },
+
+    { 'neovim/nvim-lspconfig' },-- LSP
     { 'williamboman/nvim-lsp-installer',
       config   = function() require('plugins/nvim-lsp') end,
       after    = { 'nvim-lspconfig' } },
@@ -97,5 +83,38 @@ local plugs = {
       config = function() require('plugins/vimwiki') end,
       cond   = utils.isVimNotesEnabled },
   },
+
+  newplugins = {
+    { 'echasnovski/mini.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    --{ 'rmagatti/auto-session',
+    --  --config = function() require('plugins/vimwiki') end,
+    --},
+    { 'beauwilliams/focus.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'c60cb859/bufMov.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'DanilaMihailov/beacon.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'Pocco81/HighStr.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'nvim-pack/nvim-spectre',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'APZelos/blamer.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'andythigpen/nvim-coverage',
+      --config = function() require('plugins/vimwiki') end,
+    },
+    { 'stevearc/aerial.nvim',
+      --config = function() require('plugins/vimwiki') end,
+    },
+  }
 }
 return plugs

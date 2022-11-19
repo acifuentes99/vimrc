@@ -3,16 +3,16 @@
 -----------------------------------------------------------
 -- TODO : Per Theme configurations/setups, then enable for all plugins
 
-local status_ok, color_scheme = pcall(require, 'ayu')
-if not status_ok then
-  return
-end
+--local status_ok, color_scheme = pcall(require, 'ayu')
+--if not status_ok then
+--  return
+--end
 
-color_scheme.setup({
-  mirage = true,
-  overrides = {}
-})
-color_scheme.colorscheme()
+--color_scheme.setup({
+--  mirage = true,
+--  overrides = {}
+--})
+--color_scheme.colorscheme()
 
 -- OneDark styles: dark, darker, cool, deep, warm, warmer, light
 --require('onedark').setup {
@@ -88,5 +88,10 @@ M.rose_pine = {
   orange = '#2a2837',
   red = '#ebbcba',
 }
+
+vim.cmd[[
+  colorscheme gruvbox
+  hi Normal guibg=NONE ctermbg=NONE
+]]
 
 return M
