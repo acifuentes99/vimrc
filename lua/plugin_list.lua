@@ -1,3 +1,4 @@
+-- vim: shiftwidth=4
 local utils = require('utils')
 local plugs = {
 
@@ -50,13 +51,14 @@ local plugs = {
         { 'hrsh7th/nvim-cmp',
             config = function() require('plugins/nvim-cmp') end,
             requires = {
-        { 'hrsh7th/cmp-path',         after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-buffer',       after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-cmdline',      after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lsp',     after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lua',     after = 'nvim-cmp' },
-        { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-        }}
+                { 'hrsh7th/cmp-path',         after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-buffer',       after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-cmdline',      after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lsp',     after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lua',     after = 'nvim-cmp' },
+                { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+            }
+        }
     },
 
     git = {
