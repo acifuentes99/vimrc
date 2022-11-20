@@ -44,6 +44,10 @@ map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
+--map('n', '<C-h>', ':lua require("tmux").move_left()<CR>')
+--map('n', '<C-j>', ':lua require("tmux").move_bottom()<CR>')
+--map('n', '<C-k>', ':lua require("tmux").move_top()<CR>')
+--map('n', '<C-l>', ':lua require("tmux").move_right()<CR>')
 
 -- Reload configuration without restart nvim
 map('n', '<leader>r', ':so %<CR>')
@@ -136,8 +140,17 @@ map('n', '<A-y>',   ':FzfLua yanks<CR>')
 map('n', '<A-q>',   ':FzfLua quickfix<CR>')
 map('n', '<A-m>',   ':FzfLua marks<CR>')
 
+-- Spectre - search and replace like VS Code 88
+map('n', '<A-s>',   ':lua require("spectre").open()<CR>')
+
 -- LSP mappings
 -- ** On file "nvim-lspconfig.lua" **
+map('n', 'gs',   '<Plug>(leap-cross-window)')
+map('n', 's',   '<Plug>(leap-forward-to)')
+map('n', 'S',   '<Plug>(leap-backward-to)')
+--map('v', 'S',   '<Plug>(leap-forward-to)')
+--map('v', 's',   '<Plug>(leap-backward-to)')
+
 
 -- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
 map("n",   "<leader>dc",  [[<cmd>lua require"dap".continue()<CR>]])

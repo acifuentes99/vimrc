@@ -42,7 +42,9 @@ local plugs = {
         { 'ibhagwan/fzf-lua',
             config = function() require('plugins/fzf-lua') end,
         },
-        { "aserowy/tmux.nvim", cond = utils.isNotPowershell }, -- Tmux
+        { "aserowy/tmux.nvim",
+            config = function() require("tmux").setup() end,
+            cond = utils.isNotPowershell }, -- Tmux
         { 'preservim/vimux',   cond = utils.isNotPowershell },
         { 'preservim/tagbar', }, -- Tag viewer
         { 'junegunn/vim-easy-align' }, -- Easy Align
@@ -84,19 +86,23 @@ local plugs = {
         },
 
     vimnotes = {
-        { 'vimwiki/vimwiki',
-            config = function() require('plugins/vimwiki') end,
-            cond   = utils.isVimNotesEnabled
-        },
+        --{ 'vimwiki/vimwiki',
+        --    config = function() require('plugins/vimwiki') end,
+        --    cond   = utils.isVimNotesEnabled
+        --},
+        --{ 'epwalsh/obsidian.nvim',
+        --    config = function() require('plugins/obsidian').setConfig() end,
+        --    cond   = utils.isVimNotesEnabled
+        --},
     },
 
     newplugins = {
-        { 'echasnovski/mini.nvim',
-        --    config = function() require('plugins/vimwiki') end,
-        },
-        --{ 'rmagatti/auto-session',
+        --{ 'echasnovski/mini.nvim',
         --    config = function() require('plugins/vimwiki') end,
         --},
+        { 'rmagatti/auto-session',
+            config = function() require('plugins/auto-session') end,
+        },
         { 'beauwilliams/focus.nvim',
             config = function() require('focus').setup() end,
         },
@@ -112,14 +118,18 @@ local plugs = {
         { 'nvim-pack/nvim-spectre',
             config = function() require('plugins/spectre').setConfig() end,
         },
-        { 'APZelos/blamer.nvim',
-        --    config = function() require('plugins/vimwiki') end,
+        { 'APZelos/blamer.nvim', 
+            config = function() require('plugins/blamer') end,
+            --other option: f-person/git-blame.nvim , great perfomance, but very fast that could be annoying
         },
         { 'andythigpen/nvim-coverage',
         --    config = function() require('plugins/vimwiki') end,
         },
         { 'stevearc/aerial.nvim',
-        --    config = function() require('plugins/vimwiki') end,
+            config = function() require('aerial') end,
+        },
+        { 'ggandor/leap.nvim',
+            config = function() require('leap') end,
         },
         --{ 'lewis6991/satellite.nvim', --Not working, maybe needs nightly
         --    config = function() require('satellite').setup() end,
@@ -127,6 +137,11 @@ local plugs = {
         --{ 'https://gitlab.com/madyanov/svart.nvim', --Not working, maybe needs nightly
         --    config = function() require('satellite').setup() end,
         --},
+        --{ 'petertriho/nvim-scrollbar',
+        --    config = function() require("scrollbar").setup() end,
+        --},
+
+
     }
 }
 return plugs
