@@ -64,8 +64,11 @@ map('n', '<leader>q', ':qa!<CR>')
 map('n', '<C-t>', ':TabNewWithScratchBuffer<CR>', { noremap = true })  -- open
 map('n', '<C-q>',        ':close<CR>')
 map('n', '<C-S-q>',      ':tabclose<CR>')
-map('n', '<C-Y>',        ':bprevious<CR>')
-map('n', '<C-O>',        ':bnext<CR>')
+map('n', '<C-S-o>',        ':only<CR>')
+--map('n', '<C-w>',        ':set wrap!<CR>')
+map('n', '<C-w>',        ':windo :set wrap!<CR>')
+--map('n', '<C-Y>',        ':bprevious<CR>')
+--map('n', '<C-O>',        ':bnext<CR>')
 map('n', '<C-PageUp>',   'gT')
 map('n', '<C-PageDown>', 'gt')
 map('n', '<A-1>',        '1gt')
@@ -76,8 +79,8 @@ map('n', '<A-5>',        '5gt')
 map('n', '<A-6>',        '6gt')
 map('n', '<A-7>',        '7gt')
 map('n', '<A-8>',        '8gt')
-map('n', '<leader>z',    '<C-W>_|<C-W>|')  -- zoom current buffer
-map('n', '<leader>=',    '<C-W>=')         -- reset zooms
+--map('n', '<leader>z',    '<C-W>_|<C-W>|')  -- zoom current buffer
+--map('n', '<leader>=',    '<C-W>=')         -- reset zooms
 
 -- Quickfix
 --map('n', '<A-C-j>', ':cn<CR>')
@@ -138,7 +141,8 @@ map('n', '<A-g>',   ':FzfLua git_status<CR>')
 map('n', '<A-c>',   ':FzfLua commnads<CR>')
 map('n', '<A-y>',   ':FzfLua yanks<CR>')
 map('n', '<A-q>',   ':FzfLua quickfix<CR>')
-map('n', '<A-m>',   ':FzfLua marks<CR>')
+--map('n', '<A-m>',   ':FzfLua marks<CR>')
+map('n', '<A-m>',   ':MarksQFListAll<CR>')
 
 -- Spectre - search and replace like VS Code 88
 map('n', '<A-s>',   ':lua require("spectre").open()<CR>')

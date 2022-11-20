@@ -30,7 +30,9 @@ local plugs = {
             config   = function() require("plugins/indent-blankline") end
         },
         --{ 'nanozuki/tabby.nvim' }, -- Vim Tabs
-        { 'chentoast/marks.nvim' }, -- Marks on line number
+        { 'chentoast/marks.nvim',
+            config = function() require("plugins/marks") end,
+        },
     },
 
     helpers = {
