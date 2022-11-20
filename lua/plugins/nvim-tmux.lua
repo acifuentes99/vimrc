@@ -15,11 +15,11 @@ M.conf = function()
     },
     navigation = {
       -- enables default keybindings (C-hjkl) for normal mode
-      enable_default_keybindings = true,
+      enable_default_keybindings = false,
     },
     resize = {
       -- enables default keybindings (A-hjkl) for normal mode
-      enable_default_keybindings = true,
+      enable_default_keybindings = false,
     }
   })
 end
