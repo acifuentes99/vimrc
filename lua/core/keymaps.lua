@@ -23,21 +23,25 @@ map('', '<down>',  '<nop>')
 map('', '<left>',  '<nop>')
 map('', '<right>', '<nop>')
 
+-- Mapping to move, and center line on vim
+--map('n', '{', '{zz')
+--map('n', '}', '}zz')
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
+--map('n', 'n', 'nzz')
+--map('n', 'N', 'Nzz')
+
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
 
 -- Clear search highlighting with <space>
 map('n', '<space>', ':nohl<CR>')
 
--- Change split orientation
-map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
-map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
-
--- Move around splits, and zoom
-map('n', '<A-h>', '<C-w>h<C-W>_|<C-W>|')
-map('n', '<A-j>', '<C-w>j<C-W>_|<C-W>|')
-map('n', '<A-k>', '<C-w>k<C-W>_|<C-W>|')
-map('n', '<A-l>', '<C-w>l<C-W>_|<C-W>|')
+---- Move around splits, and zoom
+--map('n', '<A-h>', '<C-w>h<C-W>_|<C-W>|')
+--map('n', '<A-j>', '<C-w>j<C-W>_|<C-W>|')
+--map('n', '<A-k>', '<C-w>k<C-W>_|<C-W>|')
+--map('n', '<A-l>', '<C-w>l<C-W>_|<C-W>|')
 
 -- Move around splits using Ctrl + {h,j,k,l}
 map('n', '<C-h>', '<C-w>h')
@@ -56,31 +60,16 @@ map('n', '<leader>r', ':so %<CR>')
 map('n', '<leader>s', ':w<CR>')
 map('i', '<leader>s', '<C-c>:w<CR>')
 
--- Close all windows and exit from Neovim with <leader> and q
-map('n', '<leader>q', ':qa!<CR>')
+-- Quick settings
+map('n', '<leader>n', ':set invnumber<CR>') -- toggle line numbers
 
--- Tab and Buffer management
---map('n', '<A-t>',        ':TabNewWithScratchBuffer<CR>')
-map('n', '<C-t>', ':TabNewWithScratchBuffer<CR>', { noremap = true })  -- open
-map('n', '<C-q>',        ':close<CR>')
-map('n', '<C-S-q>',      ':tabclose<CR>')
-map('n', '<C-S-o>',        ':only<CR>')
---map('n', '<C-w>',        ':set wrap!<CR>')
-map('n', '<C-w>',        ':windo :set wrap!<CR>')
---map('n', '<C-Y>',        ':bprevious<CR>')
---map('n', '<C-O>',        ':bnext<CR>')
-map('n', '<C-PageUp>',   'gT')
-map('n', '<C-PageDown>', 'gt')
-map('n', '<A-1>',        '1gt')
-map('n', '<A-2>',        '2gt')
-map('n', '<A-3>',        '3gt')
-map('n', '<A-4>',        '4gt')
-map('n', '<A-5>',        '5gt')
-map('n', '<A-6>',        '6gt')
-map('n', '<A-7>',        '7gt')
-map('n', '<A-8>',        '8gt')
---map('n', '<leader>z',    '<C-W>_|<C-W>|')  -- zoom current buffer
---map('n', '<leader>=',    '<C-W>=')         -- reset zooms
+-- Change split orientation
+map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
+map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
+
+-- Close all windows and exit from Neovim with <leader> and q
+--map('n', '<leader>q', ':qa!<CR>')
+
 
 -- Quickfix
 --map('n', '<A-C-j>', ':cn<CR>')
@@ -88,16 +77,32 @@ map('n', '<A-8>',        '8gt')
 map('n', '<A-j>', ':cn<CR>')
 map('n', '<A-k>', ':cp<CR>')
 
--- Quick settings
-map('n', '<leader>n', ':set invnumber<CR>') -- toggle line numbers
-
+--- LEADER -
 vim.g.mapleader = '-'
 
 --- Filename Simplifications to Clipboard
 map('n', '<leader>8', [[:let @+ = expand("%")<CR>]])      -- Copy absolute path to clipboard
 map('n', '<leader>9', [[:let @+ = expand("%:t:r")<CR>]])  -- Copy file name to clipboard
 map('n', '<leader>0', [[:echo @%<CR>]])                   -- Print file path
+map('n', '<leader>w',        ':windo :set wrap!<CR>')
+map('n', '<leader>o',        ':only<CR>')
+map('n', '<C-q>',        ':close<CR>')
 
+map('n', '<leader>1', '1gt')
+map('n', '<leader>2', '2gt')
+map('n', '<leader>3', '3gt')
+map('n', '<leader>4', '4gt')
+map('n', '<leader>5', '5gt')
+map('n', '<leader>6', '6gt')
+map('n', '<leader>7', '7gt')
+map('n', '<leader>8', '8gt')
+map('n', '<leader>9', '9gt')
+map('n', '<leader>t', ':tabnew<CR>')
+map('n', '<leader>x', ':tabclose<CR>')
+
+map('n', '<leader>b', ':GitBlameToggle<CR>')
+map('n', '<leader>dd', ':lua require("duck").hatch("")<CR>')
+map('n', '<leader>dd', ':lua require("duck").cook()<CR>')
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
@@ -142,7 +147,8 @@ map('n', '<A-c>',   ':FzfLua commnads<CR>')
 map('n', '<A-y>',   ':FzfLua yanks<CR>')
 map('n', '<A-q>',   ':FzfLua quickfix<CR>')
 --map('n', '<A-m>',   ':FzfLua marks<CR>')
-map('n', '<A-m>',   ':MarksQFListAll<CR>')
+map('n', '<A-m>',   ':luafile ~/Projects/nvim-jump-to-mark/nvim-jump-to-mark.lua<CR>')
+--map('n', '<A-m>',   ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
 
 -- Spectre - search and replace like VS Code 88
 map('n', '<A-s>',   ':lua require("spectre").open()<CR>')
@@ -178,13 +184,18 @@ map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 
 -- SpellChecker
-map('i', '<F8>', '1z=')
-map('i', '<F9>', ']s')
-map('i', '<F10>', '[s')
-map('n', '<F8>', '1z=')
-map('n', '<F9>', ']s')
-map('n', '<F10>', '[s')
+map('i', '<F7>', '1z=')
+map('i', '<F8>', ']s')
+map('i', '<F9>', '[s')
+map('n', '<F7>', '1z=')
+map('n', '<F8>', ']s')
+map('n', '<F9>', '[s')
 map('n', '<F20>', '1z=')
 map('n', '<F21>', ']s')
 map('n', '<F22>', '[s')
 map('n', '<F5>', ':setlocal spell! spelllang=en,es<CR>')
+
+-- Jumping in code - Svart
+map('n', 's', ':Svart<CR>')
+map('n', 'S', ':SvartRegex<CR>')
+map('n', 'gs', ':SvartRepeat<CR>')
