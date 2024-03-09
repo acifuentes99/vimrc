@@ -27,11 +27,11 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'mode'},
-    lualine_b = {'tabs'},
+    lualine_b = {{'tabs', mode = 2, max_length = vim.o.columns }},
     lualine_c = {},
-    lualine_x = {'diff','diagnostics'},
-    lualine_y = {'encoding','fileformat'},
-    lualine_z = {'branch'}
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
   },
   extensions = {'nvim-tree', 'quickfix'}
 }

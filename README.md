@@ -13,6 +13,8 @@ My own NeoVim configurations, now migrated into Lua
 * Start nvim with Packer Sync (`nvim +PackerSync`)
 * Enjoy magical Neovim experience
 
+* Optional : also, `ln -s -r nvim $HOME/.config/nvim` can be used to create folder that sync file changes
+
 ## ToDo
 
 * [ ] Script installation for Apex language server, or integrate to some LSP Installer

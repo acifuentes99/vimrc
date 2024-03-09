@@ -5,12 +5,12 @@
 local M = {}
 
 function M.nvimTreeOpen()
-  require("plugins/nvim-tree").setSetup()
+  require("pluginsconfig/nvim-tree")
   require("nvim-tree.api").tree.open()
 end
 
 function M.nvimTreeFindFile()
-  require("plugins/nvim-tree").setSetup()
+  require("pluginsconfig/nvim-tree")
   require("nvim-tree.api").tree.find_file()
 end
 
