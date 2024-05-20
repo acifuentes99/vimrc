@@ -2,7 +2,7 @@ local utils = require("utils")
 local themes = {
     { 'gruvbox-community/gruvbox' },
 }
- 
+
 local plugins = {
     ["obsidian"] = { "epwalsh/obsidian.nvim",
         dependencies = { "nvim-cmp" },
@@ -25,11 +25,13 @@ local plugins = {
     ["autosession"] = { 'rmagatti/auto-session',
         name = "autosession",
         config = function()
-            require("auto-session").setup {
-                log_level = "error",
-                --auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
-                auto_session_suppress_dirs = { "~/", "~/Downloads", "/"},
-            }
+            require("pluginsconfig/auto-session")
+        end
+    },
+    ["nvim-session-manager"] = { 'Shatur/neovim-session-manager',
+        name = "nvim-session-manager",
+        config = function()
+            require("pluginsconfig/nvim-session-manager")
         end
     },
     ["vim-markdown-syntax"] = { "preservim/vim-markdown",
@@ -37,6 +39,9 @@ local plugins = {
         config = function() vim.g.vim_markdown_folding_disabled = 1 end,
     },
     ["vimux"] = { 'preservim/vimux' },
+    ["treesitter"] = { 'nvim-treesitter/nvim-treesitter',
+        config = function() require("pluginsconfig/nvim-treesitter") end
+    },
     ["tmux"] = { "aserowy/tmux.nvim",
         config = function() require("pluginsconfig/nvim-tmux") end,
     },
@@ -46,6 +51,9 @@ local plugins = {
         config = function() require("pluginsconfig/nvim-tree") end
     },
     ["fzflua"]   = { "ibhagwan/fzf-lua" },
+    ["nvim-possession"]   = { "gennaro-tedesco/nvim-possession",
+        config = function() require("pluginsconfig/nvim-possession") end
+    },
     ["marks"]    = { "chentoast/marks.nvim",
         --event = "InsertEnter",
         config = function() require("pluginsconfig/marks") end, },
@@ -100,7 +108,7 @@ local plugins = {
         config = function() require('satellite').setup() end,
     },
     ["lualine"] = { 'nvim-lualine/lualine.nvim', ---- Statusbar
-        requires   = { 'kyazdani42/nvim-web-devicons', 'RRethy/nvim-base16' },
+        dependencies   = { 'kyazdani42/nvim-web-devicons', 'rrethy/nvim-base16', 'nvim-session-manager' },
         config = function() require("pluginsconfig/lualine") end
     },
     ["gitblame"] = { 'f-person/git-blame.nvim',
@@ -131,13 +139,17 @@ local plugins = {
     ["text-case"] = { 'johmsalas/text-case.nvim',
         event = {"BufNewFile","BufRead"},
     },
- 
+    ["tabby"] = { 'nanozuki/tabby.nvim',
+        config = function() require('pluginsconfig/tabby') end,
+    },
 }
- 
+
 local tablet = {"nvim-cmp", "highstr", "nvimtree", "fzflua", "marks", "vim-markdown-syntax", "obsidian"}
 local mac = {
     "aerial",
-    "autosession",
+    -- "autosession",
+    -- "nvim-possession",
+    "nvim-session-manager",
     "comment",
     "focus",
     "fzflua",
@@ -153,16 +165,18 @@ local mac = {
     "nvimtree",
     "obsidian",
     "rest-nvim",
+    "treesitter",
     "satellite",
     "spectre",
     "text-case",
     "tmux",
     "vim-markdown-syntax",
     "vimux",
+    -- "tabby",
 }
- 
+
 local pluginList = {}
 local tabletPlugins = utils.filterTableByKeys(plugins, mac)
 utils.tableMerge(pluginList, themes, tabletPlugins)
- 
+
 return pluginList

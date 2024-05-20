@@ -39,4 +39,11 @@ function M.filterTableByKeys(inputTable, keyTable)
     return resultTable
 end
 
+
+function M.get_last_folder()
+    local current_dir = vim.fn.getcwd()
+    local last_folder = current_dir:match("[^/]+$") -- Extracts the last folder using regex pattern
+    return last_folder
+end
+
 return M

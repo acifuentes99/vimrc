@@ -46,3 +46,28 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 ]]
+
+api.nvim_create_user_command('ListSessions', function()
+    -- require("fzf-lua").fzf_exec({"line1", "line2"})
+    require("fzf-lua").fzf_exec("ls", {
+      prompt="Sessions> ",
+      cwd="$HOME/.local/share/nvim/sessions",
+      actions = {
+        ['default'] = function(selected, opts)
+          -- print('asdfdasf')
+          -- print(vim.inspect(selected))
+          -- print(vim.inspect(selected[0]))
+          -- print(vim.inspect(selected[1]))
+          require("auto-session").SaveSession()
+
+          local bufs=vim.api.nvim_list_bufs()
+          local current_buf=vim.api.nvim_get_current_buf()
+          for _,i in ipairs(bufs) do
+              if i~=current_buf then
+                  vim.api.nvim_buf_delete(i,{})
+              end
+          end
+          vim.cmd("SessionRestoreFromFile $HOME/.local/share/nvim/sessions/" .. selected[1])
+        end
+      }})
+end, { nargs = 0 })

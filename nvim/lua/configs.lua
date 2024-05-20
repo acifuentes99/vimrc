@@ -15,7 +15,7 @@ opt.number = true           -- Show line number
 opt.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
 opt.ignorecase = true       -- Ignore case letters when search
 opt.smartcase = true        -- Ignore lowercase for the whole pattern
-opt.linebreak = true        -- Wrap on word boundary 
+opt.linebreak = true        -- Wrap on word boundary
 --opt.termguicolors = true    -- Enable 24-bit RGB colors
 opt.laststatus = 3            -- Set global statusline
 --opt.laststatus = 2            -- Set global statusline
@@ -29,7 +29,7 @@ opt.shiftwidth = 4              -- Shift 4 spaces when tab
 opt.tabstop = 4                 -- 1 tab == 4 spaces
 opt.smartindent = true          -- Autoindent new lines
 opt.breakindent = true          -- indent for breaklines
-opt.breakindentopt = 'shift:2'  -- set a space of 2, next line of breakident                   46 
+opt.breakindentopt = 'shift:2'  -- set a space of 2, next line of breakident                   46
 opt.showbreak = '↳'             -- Character before breaklines
 
 ----------------------------------------------------------
@@ -40,3 +40,5 @@ opt.history = 100           -- Remember N lines in history
 opt.lazyredraw = true       -- Faster scrolling
 opt.synmaxcol = 240         -- Max column for syntax highlight
 opt.updatetime = 250        -- ms to wait for trigger an event
+
+opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
