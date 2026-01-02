@@ -9,7 +9,7 @@ M.set_ts_codes_to_ignore = function(codes_to_ignore)
 	M.ts_codes_to_ignore = codes_to_ignore or {2305,2307,7045,7044}
 end
 
-M.filter_diagnostics = function(diagnostics,)
+M.filter_diagnostics = function(diagnostics)
 	local filtered = {}
 	local ignore = {}
 	for _, code in ipairs(M.ts_codes_to_ignore) do

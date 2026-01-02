@@ -190,7 +190,6 @@ local personal = {
     "mason-lspconfig",
     "nvim-cmp",
     "nvimtree",
-    "obsidian",
     "rest-nvim",
     "nvim-treesitter",
     "satellite",
@@ -204,6 +203,7 @@ local personal = {
     "indent-blankline",
     "neotree",
     "nvim-navic",
+    -- "obsidian",
     -- "tabby",
     -- "autosession",
     -- "nvim-possession",
@@ -249,8 +249,7 @@ local job_pc = {
   "sf-nvim"
 }
 
-local pluginList = {}
-local tabletPlugins = utils.filter_table_by_keys(plugins, personal)
-utils.tableMerge(pluginList, themes, tabletPlugins)
-
-return pluginList
+local plugin_list = {}
+local plugin_table = utils.filter_table_by_keys(plugins, personal)
+utils.tableMerge(plugin_list, themes, plugin_table)
+return plugin_list
