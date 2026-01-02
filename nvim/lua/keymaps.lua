@@ -20,14 +20,16 @@ map('n', '<space>', ':nohl<CR>')
 map('n', '<C-q>',        ':close<CR>')
 
 -- Move around splits using Ctrl + {h,j,k,l}
-map('n', '<C-h>', ':lua require("tmux").move_left()<CR>')
-map('n', '<C-j>', ':lua require("tmux").move_bottom()<CR>')
-map('n', '<C-k>', ':lua require("tmux").move_top()<CR>')
-map('n', '<C-l>', ':lua require("tmux").move_right()<CR>')
+map('n', '<C-h>', '<C-w>h<CR>')
+map('n', '<C-j>', '<C-w>j<CR>')
+map('n', '<C-k>', '<C-w>k<CR>')
+map('n', '<C-l>', '<C-w>l<CR>')
 
--- Mapping to C-d and C-u, center line on window
-map('n', '<C-d>', '<C-d>zz')
+
+map('n', '<C-d>', '<C-d>zz')        -- Mapping to C-d and C-u, center line on window
 map('n', '<C-u>', '<C-u>zz')
+map('n', 'n', 'nzz')                -- Highlight searchs
+map('n', 'N', 'Nzz')
 
 -----------------------------------------------------------
 --- OPTION/ALT KEY ( M
@@ -38,6 +40,11 @@ map('n', '<M-j>', ':cn<CR>')
 map('n', '<M-k>', ':cp<CR>')
 
 -----------------------------------------------------------
+--- SIDEBAR
+-----------------------------------------------------------
+map('n', '-S', ':lua require("core/callables").toggle_sidebar()<CR>')
+
+-----------------------------------------------------------
 --- LEADER " , "
 -----------------------------------------------------------
 
@@ -46,8 +53,9 @@ map('n', ',p',   ':FzfLua files resume=true<CR>')
 map('n', ',h',   ':FzfLua oldfiles resume=true<CR>')
 map('n', ',b',   ':FzfLua buffers resume=true<CR>')
 map('n', ',w',   ':FzfLua tabs<CR>')
-map('n', ',f',   ':FzfLua grep_project resume=true<CR>')
---map('n', ',f',   ':FzfLua live_grep_glob resume=true<CR>')
+map('n', ',s',   ':SessionManager load_session<CR>')
+-- map('n', ',f',   ':FzfLua grep_project resume=true<CR>')
+map('n', ',f',   ':FzfLua live_grep_glob resume=true<CR>')
 map('n', ',g',   ':FzfLua git_status resume=true<CR>')
 map('n', ',c',   ':FzfLua command_history resume=true<CR>')
 map('n', ',y',   ':FzfLua yanks<CR>')
@@ -56,8 +64,10 @@ map('n', ',k',   ':luafile /Users/C305249/Repositories/nvim-jump-to-mark/nvim-ju
 map('n', ',m', ':lua require("core/callables").fzf_macro_selector()<CR>')
 map('n', ',l', ':lua require\'fzf-lua\'.live_grep({ cmd = "rg -l" })<CR>')
 
+map('n', '-s',   ':SessionManager available_commands<CR>')
+
 -- Spectre
-map('n', ',s',   ':lua require("spectre").open()<CR>')
+map('n', ',r',   ':lua require("spectre").open()<CR>')
 --map('n', ',s',   ':lua require("spectre").search_resume()<CR>')
 
 -- NvimTree
@@ -75,7 +85,7 @@ map('n', ',e',     ':NvimTreeFindFile<CR>')      -- search file
 map('n', '-r', ':so %<CR>')
 
 -- Fast saving with <leader> and s
-map('n', '-s', ':w<CR>')
+-- map('n', '-w', ':w<CR>')
 --map('i', '-s', '<C-c>:w<CR>')
 
 --- Filename Simplifications to Clipboard

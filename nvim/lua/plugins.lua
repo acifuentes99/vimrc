@@ -1,6 +1,7 @@
 local utils = require("utils")
 local themes = {
     { 'gruvbox-community/gruvbox' },
+    { 'folke/tokyonight.nvim' },
 }
 
 local plugins = {
@@ -28,6 +29,14 @@ local plugins = {
             require("pluginsconfig/auto-session")
         end
     },
+    ["sunglasses"] = { 'miversen33/sunglasses.nvim',
+        config = function()
+	    require("sunglasses").setup({
+		    filter_type = "SHADE",
+		    filter_percent = .45
+	    })
+        end
+    },
     ["nvim-session-manager"] = { 'Shatur/neovim-session-manager',
         name = "nvim-session-manager",
         config = function()
@@ -39,7 +48,7 @@ local plugins = {
         config = function() vim.g.vim_markdown_folding_disabled = 1 end,
     },
     ["vimux"] = { 'preservim/vimux' },
-    ["treesitter"] = { 'nvim-treesitter/nvim-treesitter',
+    ["nvim-treesitter"] = { 'nvim-treesitter/nvim-treesitter',
         config = function() require("pluginsconfig/nvim-treesitter") end
     },
     ["tmux"] = { "aserowy/tmux.nvim",
@@ -50,7 +59,14 @@ local plugins = {
         dependencies = { 'kyazdani42/nvim-web-devicons', 'RRethy/nvim-base16'},
         config = function() require("pluginsconfig/nvim-tree") end
     },
-    ["fzflua"]   = { "ibhagwan/fzf-lua" },
+    ["neotree"] = { "nvim-neo-tree/neo-tree.nvim",
+        -- lazy = true,
+        dependencies = { 'MunifTanjim/nui.nvim' },
+        config = function() require("pluginsconfig/neotree") end
+    },
+    ["fzflua"]   = { "ibhagwan/fzf-lua",
+        config = function() require("pluginsconfig/fzf-lua") end
+    },
     ["nvim-possession"]   = { "gennaro-tedesco/nvim-possession",
         config = function() require("pluginsconfig/nvim-possession") end
     },
@@ -76,25 +92,21 @@ local plugins = {
         },
         config = function() require("pluginsconfig/nvim-cmp") end,
     },
-    ["mason"] = { 'williamboman/mason.nvim',
-        name = "mason",
-        config = function() require('mason').setup() end,
-    },
     ["mason-lspconfig"] = { 'williamboman/mason-lspconfig.nvim',
         name = "mason-lspconfig",
         dependencies = {
             'mason',
+            'neovim/nvim-lspconfig',
+            'nvim-cmp',
         },
-        config = function() require('mason-lspconfig').setup {
-            ensure_installed = { "apex_ls" }
-        } end,
+        config = function() require('pluginsconfig/mason-lspconfig') end,
     },
-    ["lspconfig"] = { 'neovim/nvim-lspconfig',
-        name = "lspconfig",
-        dependencies = {
-            'mason-lspconfig',
-        }
-    },
+    -- ["lspconfig"] = { 'neovim/nvim-lspconfig',
+    --     name = "lspconfig",
+    --     dependencies = {
+    --         'mason-lspconfig',
+    --     }
+    -- },
     ["luasnip"] = { 'L3MON4D3/LuaSnip', }, -- Autocompletion & snippets,
     ["spectre"] = { 'nvim-pack/nvim-spectre',
         lazy = true,
@@ -106,6 +118,12 @@ local plugins = {
     },
     ["satellite"] = { 'lewis6991/satellite.nvim',
         config = function() require('satellite').setup() end,
+    },
+    ["nvim-navic"] = { 'SmiteshP/nvim-navic',
+      dependencies = {
+        "mason-lspconfig"
+      },
+      config = function() require('pluginsconfig/nvim-navic') end,
     },
     ["lualine"] = { 'nvim-lualine/lualine.nvim', ---- Statusbar
         dependencies   = { 'kyazdani42/nvim-web-devicons', 'rrethy/nvim-base16', 'nvim-session-manager' },
@@ -142,15 +160,21 @@ local plugins = {
     ["tabby"] = { 'nanozuki/tabby.nvim',
         config = function() require('pluginsconfig/tabby') end,
     },
+    ["indent-blankline"] = { 'lukas-reineke/indent-blankline.nvim',
+      config = function() require("ibl").setup() end
+    },
+    ["oil"] = { 'stevearc/oil.nvim',
+        config = function() require('pluginsconfig/oil') end,
+    },
+    ["gemini-autocomplete"] = { 'flyingshutter/gemini-autocomplete.nvim',
+        config = function() require('pluginsconfig/gemini-autocomplete') end,
+    }
 }
 
 local tablet = {"nvim-cmp", "highstr", "nvimtree", "fzflua", "marks", "vim-markdown-syntax", "obsidian"}
-local mac = {
+local personal = {
     "aerial",
-    -- "autosession",
-    -- "nvim-possession",
-    "nvim-session-manager",
-    "comment",
+    -- "gemini-autocomplete",
     "focus",
     "fzflua",
     "gitblame",
@@ -165,18 +189,65 @@ local mac = {
     "nvimtree",
     "obsidian",
     "rest-nvim",
-    "treesitter",
+    "nvim-treesitter",
     "satellite",
     "spectre",
+    "sunglasses",
     "text-case",
+    "oil",
     "tmux",
     "vim-markdown-syntax",
     "vimux",
+    "indent-blankline",
+    "neotree",
+    "nvim-navic",
     -- "tabby",
+    -- "autosession",
+    -- "nvim-possession",
+    -- "nvim-session-manager",
+    -- "comment",
+}
+local job_pc = {
+  "aerial",
+  "b64",
+  "comment",
+  "diffview",
+  "easy-align",
+  "focus",
+  "fzflua",
+  "gitblame",
+  "gitsigns",
+  "highlighter",
+  "lualine",
+  "marks",
+  "mason",
+  "mason-lspconfig",
+  "nvim-cmp",
+  "nvim-navbuddy",
+  "nvim-session-manager",
+  "nvim-surround",
+  "nvim-web-devicons",
+  "nvimtree",
+  "satellite",
+  "spectre",
+  "text-case",
+  "tmux",
+  "trouble",
+  "oil",
+  "vim-floatterm",
+  "vim-markdown-syntax",
+  "vimux",
+  "copilot",
+  "codecompanion",
+  "eagle",
+  "indent-blankline",
+  "nvim-colorizer",
+  "nvim-treesitter",
+  "sf-nvim"
 }
 
 local pluginList = {}
-local tabletPlugins = utils.filterTableByKeys(plugins, mac)
+local tabletPlugins = utils.filterTableByKeys(plugins, personal)
 utils.tableMerge(pluginList, themes, tabletPlugins)
 
 return pluginList

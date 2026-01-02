@@ -58,6 +58,7 @@ autocmd('CmdlineEnter', {
 autocmd('TermOpen', {
   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
+
 autocmd('TermOpen', {
   pattern = '*',
   command = 'startinsert'
@@ -87,15 +88,22 @@ autocmd({"BufNewFile","BufRead"}, {
   command = 'set filetype=html'
 })
 
--- Highlight current line only on focused window
-augroup('ActiveWinCursorLine', { clear = true })
-autocmd({"WinEnter", "BufEnter", "InsertLeave"}, {
-  group = 'ActiveWinCursorLine',
-  pattern = '*',
-  command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
+-- Open Mightysidebar on tabopen
+autocmd({"VimEnter", "TabEnter"}, {
+    callback = function()
+        require('core/callables').open_sidebar()
+    end 
 })
-autocmd({"WinLeave", "BufLeave", "InsertEnter"}, {
-  group = 'ActiveWinCursorLine',
-  pattern = '*',
-  command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
-})
+
+-- -- Highlight current line only on focused window
+-- augroup('ActiveWinCursorLine', { clear = true })
+-- autocmd({"WinEnter", "BufEnter", "InsertLeave"}, {
+--  roup = 'ActiveWinCursorLine',
+--   pattern = '*',
+--   command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
+-- })
+-- autocmd({"WinLeave", "BufLeave", "InsertEnter"}, {
+--   group = 'ActiveWinCursorLine',
+--   pattern = '*',
+--   command = 'if ! &cursorline && ! &pvw | setlocal cursorline | endif'
+-- })

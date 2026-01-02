@@ -1,8 +1,11 @@
 local devicons = require('nvim-web-devicons')
+local theme = require('utils/lualine-colors/tomorrow_night')
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
+    -- theme = 'auto',
+    theme = theme,
     component_separators = { left = ' ', right = '|'},
     section_separators = { left = '', right = ''},
     disabled_filetypes = { 'packer', 'NVimTree' },
@@ -62,7 +65,11 @@ require('lualine').setup {
         return text
       end
     }},
-    lualine_c = {},
+    -- lualine_c = { 'aerial' },
+    lualine_c = { {'navic',
+      color_correction = "static",
+      navic_opts={highlight = true}
+    } },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {
@@ -71,8 +78,9 @@ require('lualine').setup {
       -- { require('auto-session.lib').current_session_name}
     -- lualine_z = { '󰉋' .. require('auto-session.lib').current_session_name}
   },
-  extensions = {'nvim-tree', 'quickfix'}
+  extensions = {'nvim-tree', 'quickfix'},
 }
+
 
 --constant update on tabbar
 --tablar only updates, on buffer or winloaddow change
