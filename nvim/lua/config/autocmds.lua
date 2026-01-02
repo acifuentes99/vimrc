@@ -92,7 +92,7 @@ autocmd({"BufNewFile","BufRead"}, {
 autocmd({"VimEnter", "TabEnter"}, {
     callback = function()
         require('core/callables').open_sidebar()
-    end 
+    end
 })
 
 -- -- Highlight current line only on focused window

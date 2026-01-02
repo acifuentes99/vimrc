@@ -16,7 +16,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'filename'},
     lualine_b = {'filetype'},
-    lualine_c = {},
+    lualine_c = { require('core/lsp-utils').diagnostics_message },
     lualine_x = {'progress','location'},
     lualine_y = {},
     lualine_z = {}
@@ -73,7 +73,7 @@ require('lualine').setup {
     lualine_x = {},
     lualine_y = {},
     lualine_z = {
-        require("utils").get_last_folder
+        require("utils/utils").get_last_folder
     }
       -- { require('auto-session.lib').current_session_name}
     -- lualine_z = { '󰉋' .. require('auto-session.lib').current_session_name}

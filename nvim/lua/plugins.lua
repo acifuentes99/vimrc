@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("utils/utils")
 local themes = {
     { 'gruvbox-community/gruvbox' },
     { 'folke/tokyonight.nvim' },
@@ -142,6 +142,9 @@ local plugins = {
         event = {"BufNewFile","BufRead"},
         config = function() require('pluginsconfig/focus') end,
     },
+    ["which-key"] = { 'folke/which-key.nvim',
+      event = 'VeryLazy',
+    },
     ["comment"] = { 'numToStr/Comment.nvim',
         config = function() require('pluginsconfig/comment') end,
     },
@@ -247,7 +250,7 @@ local job_pc = {
 }
 
 local pluginList = {}
-local tabletPlugins = utils.filterTableByKeys(plugins, personal)
+local tabletPlugins = utils.filter_table_by_keys(plugins, personal)
 utils.tableMerge(pluginList, themes, tabletPlugins)
 
 return pluginList

@@ -1,4 +1,4 @@
-local map = require("utils").mapKey
+local map = require("utils/utils").map_key
 
 -- Disable arrow keys
 map('', '<up>',    '<nop>')
@@ -55,7 +55,7 @@ map('n', ',b',   ':FzfLua buffers resume=true<CR>')
 map('n', ',w',   ':FzfLua tabs<CR>')
 map('n', ',s',   ':SessionManager load_session<CR>')
 -- map('n', ',f',   ':FzfLua grep_project resume=true<CR>')
-map('n', ',f',   ':FzfLua live_grep_glob resume=true<CR>')
+map('n', ',f',   ':FzfLua live_grep resume=true<CR>')
 map('n', ',g',   ':FzfLua git_status resume=true<CR>')
 map('n', ',c',   ':FzfLua command_history resume=true<CR>')
 map('n', ',y',   ':FzfLua yanks<CR>')
