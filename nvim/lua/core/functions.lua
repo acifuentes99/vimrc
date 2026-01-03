@@ -47,17 +47,16 @@ function! VisualSelection(direction, extra_filter) range
 endfunction
 ]]
 
+
+----------------------------------------------------------
+-- NOT USED: List sessions in FzfLua
+-----------------------------------------------------------
 api.nvim_create_user_command('ListSessionsLegacy', function()
-    -- require("fzf-lua").fzf_exec({"line1", "line2"})
     require("fzf-lua").fzf_exec("ls", {
       prompt="Sessions> ",
       cwd="$HOME/.local/share/nvim/sessions",
       actions = {
         ['default'] = function(selected, opts)
-          -- print('asdfdasf')
-          -- print(vim.inspect(selected))
-          -- print(vim.inspect(selected[0]))
-          -- print(vim.inspect(selected[1]))
           require("auto-session").SaveSession()
 
           local bufs=vim.api.nvim_list_bufs()
@@ -74,8 +73,6 @@ end, { nargs = 0 })
 
 
 api.nvim_create_user_command('ListSessions', function()
-    -- require("fzf-lua").fzf_exec({"line1", "line2"})
-
     local sessionUtils = require("session-mamanger.utils")
     originalTable = sessionUtils.get_sessions()
     newTable = {}
@@ -87,13 +84,8 @@ api.nvim_create_user_command('ListSessions', function()
 
     require("fzf-lua").fzf_exec(newTable, {
       prompt="Sessions> ",
-      -- cwd="$HOME/.local/share/nvim/sessions",
       actions = {
-        ['default'] = function(selected, opts)
-          -- print('asdfdasf')
-          -- print(vim.inspect(selected))
-          -- print(vim.inspect(selected[0]))
-          -- print(vim.inspect(selected[1]))
+        ['default'] = function(selected)
           require("auto-session").SaveSession()
 
           local bufs=vim.api.nvim_list_bufs()
@@ -107,3 +99,35 @@ api.nvim_create_user_command('ListSessions', function()
         end
       }})
 end, { nargs = 0 })
+
+----------------------------------------------------------
+-- Util commands
+-----------------------------------------------------------
+api.nvim_create_user_command('ClearUnwantedSpaces', function()
+  api.nvim_command('%s/\\s\\+S//e')
+end, { nargs = 0 })
+
+-- Find a component in other casing to camel case
+-- (useful for searching in frontend components)
+api.nvim_create_user_command('FzfLuaFindFrontend', function()
+  local registerValue = vim.api.nvim_eval('expand("%:t:r")')
+  local rgExpression = textcase.to_dash_case(registerValue) .. '|' .. textcase.to_camel_case(registerValue)
+  require('fzf-lua').grep_project({ search = rgExpression, no_esc = true })
+end, { nargs = 0 })
+
+----------------------------------------------------------
+-- Lua function to delete all buffers that are not currently in a window
+-----------------------------------------------------------
+local function clear_not_attached_buffers()
+  local buffers = vim.api.nvim_list_bufs()
+
+  for _, bufnr in ipairs(buffers) do
+    if vim.api.nvim_buf_is_valid(bufnr) and vim.fn.bufwinnr(bufnr) == -1 then
+      pcall(vim.cmd, "silent! bwipeout! " .. bufnr)
+    end
+  end
+end
+
+vim.api.nvim_create_user_command('ClearUnusedBuffers', clear_not_attached_buffers, {
+  desc = 'Clear all buffers not attached to a window'
+})
